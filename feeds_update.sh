@@ -45,6 +45,9 @@ rm -rf luci-app-parentcontrol/{.git,LICENSE,po/zh_Hans}
 git clone https://github.com/sirpdboy/luci-app-chatgpt-web luci-app-chatgpt-web --depth 1
 rm -rf luci-app-chatgpt-web/{.git,LICENSE,po/zh_Hans}
 
+git clone https://github.com/tty228/luci-app-wechatpush luci-app-wechatpush -b master --depth 1
+rm -rf luci-app-wechatpush/{.git,LICENSE,README_en.md}
+
 git clone https://github.com/kenzok8/openwrt-packages kenzo-package -b master --depth 1
 mv kenzo-package/smartdns ./
 mv kenzo-package/luci-app-smartdns ./
