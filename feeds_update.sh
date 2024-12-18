@@ -30,7 +30,7 @@ rm -rf luci-app-partexp/{.git,LICENSE,po/zh_Hans}
 git clone https://github.com/sirpdboy/netspeedtest luci-app-netspeedtest --depth 1
 rm -rf luci-app-netspeedtest/{.git,LICENSE,luci-app-netspeedtest/po/zh_Hans}
 
-git clone https://github.com/sirpdboy/luci-theme-kucat luci-theme-kucat --depth 1
+git clone https://github.com/sirpdboy/luci-theme-kucat -b js --depth 1
 rm -rf luci-theme-kucat/{.git,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-app-eqosplus luci-app-eqosplus --depth 1
