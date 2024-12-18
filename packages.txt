@@ -1,0 +1,1 @@
+luci-app-adguardhome luci-app-advancedplus luci-app-autotimeset luci-app-chatgpt-web luci-app-ddns-go luci-app-eqosplus luci-app-lucky luci-app-netspeedtest luci-app-parentcontrol luci-app-partexp luci-app-smartdns luci-app-wizard luci-theme-kucat smartdns
