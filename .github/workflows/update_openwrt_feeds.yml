@@ -19,7 +19,7 @@ jobs:
 
       - name: Update Feeds
         run: |
-          bash update.sh
+          bash feeds_update.sh
           echo "latest_release=$(TZ='Asia/Hong_Kong' date +'%Y%m%d')" >> $GITHUB_ENV
 
       - name: Git Push
