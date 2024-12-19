@@ -60,6 +60,8 @@ mv small-package/lucky ./
 rm -rf luci-app-smartdns/{.git,po/zh_Hans}
 rm -rf small-package
 
+# git clone https://github.com/kiddin9/kwrt-packages kwrt-packages -b main --depth 1
+# rm -rf kwrt-packages
 
 # 输出目录列表并保存到 packages.txt
 # ls -d */ | xargs -n 1 basename | paste -sd ' ' - > packages.txt
