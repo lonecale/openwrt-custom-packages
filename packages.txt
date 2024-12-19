@@ -9,6 +9,9 @@ luci-app-lucky
 luci-app-netspeedtest
 luci-app-parentcontrol
 luci-app-partexp
+luci-app-smartdns
 luci-app-wechatpush
 luci-app-wizard
 luci-theme-kucat
+lucky
+smartdns
