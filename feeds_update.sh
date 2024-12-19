@@ -16,8 +16,8 @@ rm -rf sirpdboy-package
 
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
 git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
-# mv luci-app-lucky/luci-app-lucky ./
-rm -rf luci-app-lucky/{.git,LICENSE,lucky,previews}
+mv luci-app-lucky/luci-app-lucky ./
+rm -rf luci-app-lucky/{.git,.github,LICENSE,lucky,previews}
 
 git clone https://github.com/sirpdboy/luci-app-autotimeset luci-app-autotimeset --depth 1
 rm -rf luci-app-autotimeset/{.git,.github,LICENSE,po/zh_Hans}
