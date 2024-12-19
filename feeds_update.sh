@@ -52,7 +52,7 @@ rm -rf luci-app-chatgpt-web/{.git,LICENSE,po/zh_Hans}
 git clone https://github.com/tty228/luci-app-wechatpush luci-app-wechatpush -b master --depth 1
 rm -rf luci-app-wechatpush/{.git,.github,LICENSE,README_en.md}
 
-git clone https://github.com/kenzok8/small-package small-package -b master --depth 1
+git clone https://github.com/kenzok8/small-package small-package -b main --depth 1
 
 mv small-package/smartdns ./
 mv small-package/luci-app-smartdns ./
