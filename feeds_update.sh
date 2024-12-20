@@ -61,11 +61,12 @@ rm -rf luci-app-syscontrol/{.git,.github,LICENSE,README_en.md}
 git clone https://github.com/kenzok8/small-package small-package -b main --depth 1
 
 mv small-package/smartdns ./
-mv small-package/luci-app-smartdns ./
 mv small-package/lucky ./
 mv small-package/adguardhome ./
-rm -rf luci-app-smartdns/{.git}
 rm -rf small-package
+
+git clone https://github.com/pymumu/luci-app-smartdns luci-app-smartdns -b master --depth 1
+rm -rf luci-app-smartdns/.git
 
 git clone https://github.com/kiddin9/kwrt-packages kwrt-packages -b main --depth 1
 mv kwrt-packages/luci-app-advancedplus ./
