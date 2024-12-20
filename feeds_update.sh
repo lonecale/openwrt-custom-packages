@@ -15,8 +15,7 @@ rm -rf luci-app-adguardhome/{.git}
 rm -rf sirpdboy-package
 
 git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --depth 1
-rm -rf luci-app-filemanager/{.git}
-rm -rf luci-app-filemanager
+rm -rf luci-app-filemanager/.git
 
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
 git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
