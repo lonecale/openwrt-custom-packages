@@ -60,6 +60,7 @@ git clone https://github.com/kenzok8/small-package small-package -b main --depth
 mv small-package/smartdns ./
 mv small-package/luci-app-smartdns ./
 mv small-package/lucky ./
+mv small-package/adguardhome ./
 rm -rf luci-app-smartdns/{.git}
 rm -rf small-package
 
