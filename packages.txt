@@ -5,7 +5,6 @@ luci-app-autotimeset
 luci-app-chatgpt-web
 luci-app-ddns-go
 luci-app-eqosplus
-luci-app-filemanager
 luci-app-lucky
 luci-app-netspeedtest
 luci-app-parentcontrol
