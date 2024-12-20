@@ -60,6 +60,7 @@ rm -rf luci-app-syscontrol/{.git,.github,LICENSE,README_en.md}
 
 git clone https://github.com/pymumu/luci-app-smartdns luci-app-smartdns -b master --depth 1
 rm -rf luci-app-smartdns/{.git,po/de,po/es,po/pt-BR,po/templates,po/zh_Hant}
+sed -i 's|include ../../luci.mk|include $(TOPDIR)/feeds/luci/luci.mk|' luci-app-smartdns/Makefile
 
 git clone https://github.com/kenzok8/small-package small-package -b main --depth 1
 
