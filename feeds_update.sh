@@ -8,11 +8,14 @@ mv */ /tmp/extd/
 # download feeds
 git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
 mv sirpdboy-package/luci-app-adguardhome ./
-mv sirpdboy-package/luci-app-fileassistant ./
+# mv sirpdboy-package/luci-app-fileassistant ./
 
 # 如果需要清理 luci-app-adguardhome 中的 .git、LICENSE、README.md，可以取消注释下面这一行
 rm -rf luci-app-adguardhome/{.git}
 rm -rf sirpdboy-package
+
+git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --depth 1
+rm -rf luci-app-filemanager/{.git}
 
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
 git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
