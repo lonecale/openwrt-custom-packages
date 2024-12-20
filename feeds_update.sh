@@ -25,8 +25,8 @@ rm -rf luci-app-lucky/{.git,.github,LICENSE,lucky,previews}
 git clone https://github.com/sirpdboy/luci-app-autotimeset luci-app-autotimeset --depth 1
 rm -rf luci-app-autotimeset/{.git,.github,LICENSE}
 
-git clone https://github.com/sirpdboy/luci-app-advancedplus luci-app-advancedplus --depth 1
-rm -rf luci-app-advancedplus/{.git,.github,LICENSE}
+# git clone https://github.com/sirpdboy/luci-app-advancedplus luci-app-advancedplus --depth 1
+# rm -rf luci-app-advancedplus/{.git,.github,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-app-ddns-go luci-app-ddns-go --depth 1
 rm -rf luci-app-ddns-go/{.git,.github,LICENSE}
@@ -67,8 +67,9 @@ mv small-package/adguardhome ./
 rm -rf luci-app-smartdns/{.git}
 rm -rf small-package
 
-# git clone https://github.com/kiddin9/kwrt-packages kwrt-packages -b main --depth 1
-# rm -rf kwrt-packages
+git clone https://github.com/kiddin9/kwrt-packages kwrt-packages -b main --depth 1
+mv kwrt-packages/luci-app-advancedplus ./
+rm -rf kwrt-packages
 
 # 输出目录列表并保存到 packages.txt
 # ls -d */ | xargs -n 1 basename | paste -sd ' ' - > packages.txt
