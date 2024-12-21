@@ -5,12 +5,11 @@ shopt -s extglob
 mkdir -p /tmp/extd/
 mv */ /tmp/extd/
 
-# download feeds
+# download
 git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
 mv sirpdboy-package/luci-app-adguardhome ./
 # mv sirpdboy-package/luci-app-fileassistant ./
 
-# 如果需要清理 luci-app-adguardhome 中的 .git、LICENSE、README.md，可以取消注释下面这一行
 rm -rf luci-app-adguardhome/{.git}
 rm -rf sirpdboy-package
 
@@ -58,21 +57,30 @@ rm -rf luci-app-wechatpush/{.git,.github,LICENSE,README_en.md}
 git clone https://github.com/kiddin9/luci-app-syscontrol luci-app-syscontrol --depth 1
 rm -rf luci-app-syscontrol/{.git,.github,LICENSE,README_en.md}
 
-git clone https://github.com/pymumu/luci-app-smartdns luci-app-smartdns -b master --depth 1
-rm -rf luci-app-smartdns/{.git,po/de,po/es,po/pt-BR,po/templates,po/zh_Hant}
-sed -i 's|include ../../luci.mk|include $(TOPDIR)/feeds/luci/luci.mk|' luci-app-smartdns/Makefile
+# git clone https://github.com/pymumu/luci-app-smartdns luci-app-smartdns -b master --depth 1
+# rm -rf luci-app-smartdns/{.git,po/de,po/es,po/pt-BR,po/templates,po/zh_Hant}
+# sed -i 's|include ../../luci.mk|include $(TOPDIR)/feeds/luci/luci.mk|' luci-app-smartdns/Makefile
 
 git clone https://github.com/kenzok8/small-package small-package -b main --depth 1
 
-mv small-package/smartdns ./
+# mv small-package/smartdns ./
 mv small-package/lucky ./
 mv small-package/adguardhome ./
 rm -rf small-package
 
-
 git clone https://github.com/kiddin9/kwrt-packages kwrt-packages -b main --depth 1
 mv kwrt-packages/luci-app-advancedplus ./
 rm -rf kwrt-packages
+
+git clone https://github.com/immortalwrt/luci immortalwrt-luci -b master --depth 1
+mv immortalwrt-luci/applications/luci-app-smartdns ./
+find luci-app-smartdns \( -name .git -o \( -path 'luci-app-smartdns/po/*' ! -name 'zh_Hans' \) \) -exec rm -rf {} +
+
+rm -rf immortalwrt-luci
+
+git clone https://github.com/immortalwrt/packages immortalwrt-packages -b master --depth 1
+mv immortalwrt-packages/net/smartdns ./
+rm -rf immortalwrt-packages
 
 # 输出目录列表并保存到 packages.txt
 # ls -d */ | xargs -n 1 basename | paste -sd ' ' - > packages.txt
