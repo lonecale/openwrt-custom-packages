@@ -43,8 +43,8 @@ rm -rf luci-theme-kucat/{.git,LICENSE}
 git clone https://github.com/sirpdboy/luci-app-eqosplus luci-app-eqosplus --depth 1
 rm -rf luci-app-eqosplus/{.git,LICENSE}
 
-git clone https://github.com/sirpdboy/luci-app-wizard luci-app-wizard --depth 1
-rm -rf luci-app-wizard/{.git,.github,LICENSE}
+git clone https://github.com/sirpdboy/luci-app-netwizard luci-app-netwizard --depth 1
+rm -rf luci-app-netwizard/{.git,.github,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-app-parentcontrol luci-app-parentcontrol --depth 1
 rm -rf luci-app-parentcontrol/{.git,.github,LICENSE}
