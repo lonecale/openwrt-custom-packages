@@ -75,7 +75,7 @@ rm -rf kwrt-packages
 git clone https://github.com/immortalwrt/luci immortalwrt-luci -b master --depth 1
 mv immortalwrt-luci/applications/luci-app-smartdns ./
 find luci-app-smartdns \( -name .git -o \( -path 'luci-app-smartdns/po/*' ! -name 'zh_Hans' \) \) -exec rm -rf {} +
-
+sed -i 's|include ../../luci.mk|include $(TOPDIR)/feeds/luci/luci.mk|' luci-app-smartdns/Makefile
 rm -rf immortalwrt-luci
 
 git clone https://github.com/immortalwrt/packages immortalwrt-packages -b master --depth 1
