@@ -26,7 +26,6 @@ mv sirpdboy-package/luci-app-adguardhome ./
 
 mv sirpdboy-package/luci-app-netdata/root/usr/share/netdata/webcn ./webcn
 mv sirpdboy-package/luci-app-netdata/root/etc/uci-defaults ./netdata-uci-defaults
-sed -i 's/chmod +x //' netdata-uci-defaults/40_luci-app-netdata
 
 # mv sirpdboy-package/luci-app-fileassistant ./
 
@@ -40,9 +39,10 @@ git clone https://github.com/muink/luci-app-netdata luci-app-netdata -b master -
 mkdir -p luci-app-netdata/root/usr/share/netdata/webcn
 mkdir -p luci-app-netdata/root/etc/uci-defaults
 mv webcn/* luci-app-netdata/root/usr/share/netdata/webcn/
+sed -i 's/chmod +x //' netdata-uci-defaults/40_luci-app-netdata
 mv netdata-uci-defaults/* luci-app-netdata/root/etc/uci-defaults/
 rm -rf webcn netdata-uci-defaults
-rm -rf luci-app-netdata/{.git,LICENSE}
+rm -rf luci-app-netdata/{.git,LICENSE,po/zh_Hant}
 
 git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --depth 1
 rm -rf luci-app-filemanager/.git
