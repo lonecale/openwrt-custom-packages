@@ -24,7 +24,8 @@ mv */ /tmp/extd/
 git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
 mv sirpdboy-package/luci-app-adguardhome ./
 
-mv sirpdboy-package/luci-app-netdata/root/usr/share/netdata/webcn ./webcn
+mkdir -p ./webcn
+mv sirpdboy-package/luci-app-netdata/root/usr/share/netdata/webcn/{dashboard_info.js,dashboard.js,main.js,index.html} ./webcn/
 mv sirpdboy-package/luci-app-netdata/root/etc/uci-defaults ./netdata-uci-defaults
 
 # mv sirpdboy-package/luci-app-fileassistant ./
@@ -39,6 +40,9 @@ git clone https://github.com/muink/luci-app-netdata luci-app-netdata -b master -
 mkdir -p luci-app-netdata/root/usr/share/netdata/webcn
 mkdir -p luci-app-netdata/root/etc/uci-defaults
 mv webcn/* luci-app-netdata/root/usr/share/netdata/webcn/
+sed -i '/\/usr\/share\/netdata\/webcn\/netdata/d' netdata-uci-defaults/40_luci-app-netdata
+sed -i '/\/usr\/share\/netdata\/webcn\/netdata.conf/d' netdata-uci-defaults/40_luci-app-netdata
+sed -i '/\/usr\/share\/netdata\/webcn\/netdata.init/d' netdata-uci-defaults/40_luci-app-netdata
 sed -i 's/chmod +x //' netdata-uci-defaults/40_luci-app-netdata
 mv netdata-uci-defaults/* luci-app-netdata/root/etc/uci-defaults/
 rm -rf webcn netdata-uci-defaults
