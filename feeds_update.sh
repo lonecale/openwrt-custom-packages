@@ -39,8 +39,8 @@ rm -rf netdata-ssl/{.git,LICENSE}
 git clone https://github.com/muink/luci-app-netdata luci-app-netdata -b master --depth 1
 mkdir -p luci-app-netdata/root/usr/share/netdata/webcn
 mkdir -p luci-app-netdata/root/etc/uci-defaults
-mv webcn luci-app-netdata/root/usr/share/netdata/
-mv netdata-uci-defaults luci-app-netdata/root/etc/uci-defaults/
+mv webcn/* luci-app-netdata/root/usr/share/netdata/webcn/
+mv netdata-uci-defaults/* luci-app-netdata/root/etc/uci-defaults/
 rm -rf webcn netdata-uci-defaults
 rm -rf luci-app-netdata/{.git,LICENSE}
 
