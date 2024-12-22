@@ -14,6 +14,14 @@ PKG_NAME:=luci-app-netdata
 PKG_VERSION:=1.3
 PKG_RELEASE:=20240303
 
+define Package/$(LUCI_NAME)/conffiles
+endef
+
+define Package/$(LUCI_NAME)/postinst
+endef
+
+define Package/$(LUCI_NAME)/prerm
+endef
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
