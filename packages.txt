@@ -17,4 +17,5 @@ luci-app-syscontrol
 luci-app-wechatpush
 luci-theme-kucat
 lucky
+netdata-ssl
 smartdns
