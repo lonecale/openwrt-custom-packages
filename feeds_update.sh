@@ -43,7 +43,8 @@ mv webcn/* luci-app-netdata/root/usr/share/netdata/webcn/
 sed -i '/\/usr\/share\/netdata\/webcn\/netdata/d' netdata-uci-defaults/40_luci-app-netdata
 sed -i '/\/usr\/share\/netdata\/webcn\/netdata.conf/d' netdata-uci-defaults/40_luci-app-netdata
 sed -i '/\/usr\/share\/netdata\/webcn\/netdata.init/d' netdata-uci-defaults/40_luci-app-netdata
-sed -i 's/chmod +x //' netdata-uci-defaults/40_luci-app-netdata
+# sed -i 's/chmod +x //' netdata-uci-defaults/40_luci-app-netdata
+sed -i '/chmod +x/d' netdata-uci-defaults/40_luci-app-netdata
 mv netdata-uci-defaults/* luci-app-netdata/root/etc/uci-defaults/
 rm -rf webcn netdata-uci-defaults
 rm -rf luci-app-netdata/{.git,LICENSE,po/zh_Hant}
