@@ -23,12 +23,16 @@ mv */ /tmp/extd/
 # download
 git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
 mv sirpdboy-package/luci-app-adguardhome ./
-mv sirpdboy-package/luci-app-netdata ./
 # mv sirpdboy-package/luci-app-fileassistant ./
 
 rm -rf luci-app-adguardhome/{.git}
-rm -rf luci-app-netdata/{.git}
 rm -rf sirpdboy-package
+
+git clone https://github.com/muink/openwrt-netdata-ssl netdata-ssl -b master --depth 1
+rm -rf netdata-ssl/{.git,LICENSE}
+
+git clone https://github.com/muink/luci-app-netdata luci-app-netdata -b master --depth 1
+rm -rf luci-app-netdata/{.git,LICENSE}
 
 git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --depth 1
 rm -rf luci-app-filemanager/.git
