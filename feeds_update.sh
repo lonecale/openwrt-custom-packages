@@ -54,6 +54,7 @@ git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --d
 rm -rf luci-app-filemanager/.git
 
 git clone https://github.com/sbwml/OpenAppFilter luci-app-oaf --depth 1
+sed -i '/#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0))/,/#endif/d' luci-app-oaf/oaf/src/af_log.c
 rm -rf luci-app-oaf/{.git,LICENSE}
 
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
