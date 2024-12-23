@@ -45,6 +45,7 @@ sed -i '/\/usr\/share\/netdata\/webcn\/netdata.conf/d' netdata-uci-defaults/40_l
 sed -i '/\/usr\/share\/netdata\/webcn\/netdata.init/d' netdata-uci-defaults/40_luci-app-netdata
 # sed -i 's/chmod +x //' netdata-uci-defaults/40_luci-app-netdata
 sed -i '/chmod +x/d' netdata-uci-defaults/40_luci-app-netdata
+sed -i '/msgid "Netdata"/{n;s/msgstr ""/msgstr "实时监控"/}' luci-app-netdata/po/zh_Hans/netdata.po
 mv netdata-uci-defaults/* luci-app-netdata/root/etc/uci-defaults/
 rm -rf webcn netdata-uci-defaults
 rm -rf luci-app-netdata/{.git,LICENSE,po/zh_Hant}
