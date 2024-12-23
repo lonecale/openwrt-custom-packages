@@ -53,8 +53,8 @@ rm -rf luci-app-netdata/{.git,LICENSE,po/zh_Hant}
 git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --depth 1
 rm -rf luci-app-filemanager/.git
 
-git clone https://github.com/sbwml/OpenAppFilter OpenAppFilter --depth 1
-rm -rf luci-app-netdata/{.git,LICENSE}
+git clone https://github.com/sbwml/OpenAppFilter luci-app-oaf --depth 1
+rm -rf luci-app-oaf/{.git,LICENSE}
 
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
 git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
