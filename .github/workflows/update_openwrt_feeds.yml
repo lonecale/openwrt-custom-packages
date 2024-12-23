@@ -3,7 +3,7 @@ name: Update OpenWrt Feeds
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 16 * * *"
+    - cron: "10 9,14 * * *"
 
 jobs:
   sync:
