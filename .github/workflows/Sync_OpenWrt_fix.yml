@@ -115,11 +115,12 @@ jobs:
         # 创建目标目录并移动文件
         TARGET_DIR="./$REPO_NAME"
         mkdir -p "$TARGET_DIR"
-
+        echo -e "\033[32m$TARGET_DIR 目录创建完成。\033[0m"
         for DIR in $(echo "$DIR_LIST" | tr ' ' '\n'); do
           TARGET_SUB_DIR="$TARGET_DIR/$DIR"
           mkdir -p "$TARGET_SUB_DIR"
-          
+          echo -e "\033[32m$TARGET_SUB_DIR 目录创建完成。\033[0m"
+
           if [ -d "$REPO_DIR/$DIR" ]; then
             echo -e "\033[32m移动目录 $DIR 中的文件...\033[0m"
             mv "$REPO_DIR/$DIR"/* "$TARGET_SUB_DIR" 2>/dev/null || true
