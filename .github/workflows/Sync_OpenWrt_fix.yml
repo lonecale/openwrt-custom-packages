@@ -25,12 +25,18 @@ jobs:
     - name: Set up GitHub token
       run: echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
+    # 定义关键词（在此步骤中设置KEYWORD）
+    - name: Define keyword
+      run: |
+        echo "KEYWORD=fix+GCC14" >> $GITHUB_ENV
+
     # 克隆仓库并处理每个仓库
     - name: Process repositories
       run: |
         REPO=${{ matrix.repo }}
         GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
-        
+        KEYWORD="${{ env.KEYWORD }}"
+
         # 提取仓库名称和目录
         REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
         REPO_BASE=$(echo "$REPO_NAME" | cut -d'/' -f2)
@@ -49,6 +55,14 @@ jobs:
         while :; do
           # 获取包含 "GCC14" 的提交
           RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/search/commits?q=repo:$REPO+$KEYWORD&per_page=$PER_PAGE&page=$PAGE&sort=committer-date&order=desc" -H "Accept: application/vnd.github.v3.full+json")
+
+          # 检查响应是否有效
+          HTTP_STATUS=$(echo "$RESPONSE" | tail -n 1)
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "API请求失败: $RESPONSE"
+            exit 1
+          fi
+
           echo "$GITHUB_TOKEN"
           echo "$RESPONSE"
           # 提取提交的 SHA 列表
@@ -79,6 +93,14 @@ jobs:
           echo -e "\033[34m正在处理提交 $COMMIT_SHA...\033[0m"
           # 获取该提交的详细信息
           COMMIT_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$REPO/commits/$COMMIT_SHA")
+
+          # 检查响应是否有效
+          HTTP_STATUS=$(echo "$COMMIT_FILES" | tail -n 1)
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "API请求失败: $RESPONSE"
+            exit 1
+          fi
+
           # 检查返回的数据是否包含有效的文件变更
           FILES=$(echo "$COMMIT_FILES" | jq -r '.files | if . != null then .[].filename else empty end')
 
