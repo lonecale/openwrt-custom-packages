@@ -132,7 +132,7 @@ jobs:
               echo -e "\033[32m移动目录 $REPO_DIR/$DIR 中的文件...\033[0m"
               mv "$REPO_DIR/$DIR"/* "$TARGET_SUB_DIR" 2>/dev/null || true
             else
-              echo -e "\033[31m目录 $REPO_DIR/$DIR 在仓库中不存在，跳过此目录。\033[0m"
+              echo -e "\033[31m目录 $REPO_DIR/$DIR 在仓库中不存在或者已经移动过，跳过此目录。\033[0m"
             fi
           done
   
