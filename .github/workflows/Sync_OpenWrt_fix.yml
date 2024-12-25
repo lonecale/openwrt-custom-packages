@@ -101,10 +101,10 @@ jobs:
             for FILE in $FILES; do
               DIR=$(dirname "$FILE")
               if [[ "$REPO" == "openwrt/openwrt" ]]; then
-                ROOT_DIR=$(echo "$DIR" | cut -d/ -f1-3)
+                ROOT_DIR=$(echo "$DIR" | cut -d/ -f1-4)
               else
                 # 其他仓库提取2级目录
-                ROOT_DIR=$(echo "$DIR" | cut -d/ -f1-2)
+                ROOT_DIR=$(echo "$DIR" | cut -d/ -f1-4)
               fi
               DIR_LIST="$DIR_LIST $ROOT_DIR"
             done
