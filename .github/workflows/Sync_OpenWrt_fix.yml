@@ -90,11 +90,6 @@ jobs:
           # 获取该提交的详细信息
           COMMIT_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$REPO/commits/$COMMIT_SHA")
 
-          if echo "$COMMIT_FILES" | grep -q '"status"'; then
-            echo "API请求失败，返回内容：$COMMIT_FILES"
-            exit 1
-          fi
-
           # 检查返回的数据是否包含有效的文件变更
           FILES=$(echo "$COMMIT_FILES" | jq -r '.files | if . != null then .[].filename else empty end')
 
