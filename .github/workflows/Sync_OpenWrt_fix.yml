@@ -117,7 +117,7 @@ jobs:
           DIR_LIST=$(echo "$DIR_LIST" | tr ' ' '\n' | sort | uniq)
   
           echo -e "\033[32m仓库 '$REPO' 修改过的目录：\033[0m"
-          echo "$DIR_LIST"
+          echo "$REPO_DIR/$DIR_LIST"
           echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
   
           # 创建目标目录并移动文件
@@ -128,10 +128,10 @@ jobs:
             mkdir -p "$TARGET_SUB_DIR"
   
             if [ -d "$REPO_DIR/$DIR" ]; then
-              echo -e "\033[32m移动目录 $DIR 中的文件...\033[0m"
+              echo -e "\033[32m移动目录 $REPO_DIR/$DIR 中的文件...\033[0m"
               mv "$REPO_DIR/$DIR"/* "$TARGET_SUB_DIR" 2>/dev/null || true
             else
-              echo -e "\033[31m目录 $DIR 在仓库中不存在，跳过此目录。\033[0m"
+              echo -e "\033[31m目录 $REPO_DIR/$DIR 在仓库中不存在，跳过此目录。\033[0m"
             fi
           done
   
