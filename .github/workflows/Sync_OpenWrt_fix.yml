@@ -91,7 +91,7 @@ jobs:
           COMMIT_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$REPO/commits/$COMMIT_SHA")
 
           if echo "$COMMIT_FILES" | grep -q '"status"'; then
-            echo "API请求失败，返回内容：$RESPONSE"
+            echo "API请求失败，返回内容：$COMMIT_FILES"
             exit 1
           fi
 
@@ -118,7 +118,7 @@ jobs:
         echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
 
         # 创建目标目录并移动文件
-        TARGET_DIR="./openwrt"
+        TARGET_DIR="./$REPO_NAME"
         mkdir -p "$TARGET_DIR"
 
         for DIR in $(echo "$DIR_LIST" | tr ' ' '\n'); do
