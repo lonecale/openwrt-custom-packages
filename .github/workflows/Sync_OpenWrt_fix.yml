@@ -1,0 +1,141 @@
+name: Sync OpenWrt fix
+
+on:
+  schedule:
+    - cron: "0 12 * * *"  # 每天中午12点触发此工作流 (UTC时间)
+  workflow_dispatch:  # 允许手动触发工作流
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      TZ: 'Asia/Shanghai'
+
+    strategy:
+      matrix:
+        repo: ["openwrt/packages", "openwrt/luci"]  # 多仓库支持
+
+    steps:
+    # 克隆仓库并处理
+    - name: Checkout repository
+      uses: actions/checkout@main
+      # 使用actions/checkout来获取工作目录
+
+    # 设置 GitHub Token
+    - name: Set up GitHub token
+      run: echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
+    # 克隆仓库并处理每个仓库
+    - name: Process repositories
+      run: |
+        REPO=${{ matrix.repo }}
+        GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+        
+        # 提取仓库名称和目录
+        REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
+        REPO_DIR="$REPO_NAME_tmp"
+        
+        # 克隆仓库
+        echo -e "\033[32m正在克隆仓库: $REPO\033[0m"
+        git clone "https://github.com/$REPO.git" "$REPO_DIR"
+        
+        # 获取提交并筛选出相关目录
+        PAGE=1
+        PER_PAGE=100
+        REPO_COMMIT_LIST=""
+
+        # 获取包含指定关键词的提交记录
+        while :; do
+          # 获取包含 "GCC14" 的提交
+          RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/search/commits?q=repo:$REPO+$KEYWORD&per_page=$PER_PAGE&page=$PAGE&sort=committer-date&order=desc" -H "Accept: application/vnd.github.v3.full+json")
+          # 提取提交的 SHA 列表
+          PAGE_COMMIT_LIST=$(echo "$RESPONSE" | jq -r '.items[].sha')
+
+          # 如果没有返回任何提交，退出循环
+          if [ -z "$PAGE_COMMIT_LIST" ]; then
+            break
+          fi
+
+          REPO_COMMIT_LIST="$REPO_COMMIT_LIST $PAGE_COMMIT_LIST"
+          echo -e "\033[33m搜索到仓库 '$REPO' 的提交: $PAGE_COMMIT_LIST\033[0m"
+          ((PAGE++))
+        done
+
+        # 如果没有找到相关提交，跳过该仓库
+        if [ -z "$REPO_COMMIT_LIST" ]; then
+          echo -e "\033[31m仓库 '$REPO' 没有找到符合条件的提交，跳过该仓库。\033[0m"
+          rm -rf "$REPO_DIR"
+          continue
+        fi
+        
+        # 初始化目录列表
+        DIR_LIST=""
+
+        # 遍历每个提交，获取文件修改并提取目录
+        for COMMIT_SHA in $REPO_COMMIT_LIST; do
+          echo -e "\033[34m正在处理提交 $COMMIT_SHA...\033[0m"
+          # 获取该提交的详细信息
+          COMMIT_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$REPO/commits/$COMMIT_SHA")
+          # 检查返回的数据是否包含有效的文件变更
+          FILES=$(echo "$COMMIT_FILES" | jq -r '.files | if . != null then .[].filename else empty end')
+
+          if [ -z "$FILES" ]; then
+            echo -e "\033[33m提交 $COMMIT_SHA 没有修改文件，跳过。\033[0m"
+            continue
+          fi
+
+          for FILE in $FILES; do
+            DIR=$(dirname "$FILE")
+            ROOT_DIR=$(echo "$DIR" | cut -d/ -f1,2)
+            DIR_LIST="$DIR_LIST $ROOT_DIR"
+          done
+        done
+        
+        # 去重并排序目录列表
+        DIR_LIST=$(echo "$DIR_LIST" | tr ' ' '\n' | sort | uniq)
+
+        echo -e "\033[32m仓库 '$REPO' 修改过的目录：\033[0m"
+        echo "$DIR_LIST"
+        echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
+
+        # 创建目标目录并移动文件
+        TARGET_DIR="./openwrt"
+        mkdir -p "$TARGET_DIR"
+
+        for DIR in $(echo "$DIR_LIST" | tr ' ' '\n'); do
+          TARGET_SUB_DIR="$TARGET_DIR/$DIR"
+          mkdir -p "$TARGET_SUB_DIR"
+          
+          if [ -d "$REPO_DIR/$DIR" ]; then
+            echo -e "\033[32m移动目录 $DIR 中的文件...\033[0m"
+            mv "$REPO_DIR/$DIR"/* "$TARGET_SUB_DIR" 2>/dev/null || true
+          else
+            echo -e "\033[31m目录 $DIR 在仓库中不存在，跳过此目录。\033[0m"
+          fi
+        done
+
+        # 删除仓库目录
+        rm -rf "$REPO_DIR"
+        echo -e "\033[32m删除仓库临时目录 $REPO_DIR。\033[0m"
+
+    # 提交更新
+    - name: Commit Changes
+      run: |
+        cd openwrt
+        if [[ -n $(git status -s) ]]; then
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M')"
+          git push origin HEAD
+          echo -e "\033[32m提交更改并推送到远程仓库。\033[0m"
+        else
+          echo -e "\033[33m没有更改需要提交。\033[0m"
+        fi
+
+    # 清理工作流
+    - name: Cleanup Workflow
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        retain_days: 0
+        keep_minimum_runs: 2
