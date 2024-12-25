@@ -56,8 +56,11 @@ jobs:
             # 获取包含 "GCC14" 的提交
             RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/search/commits?q=repo:$REPO+$KEYWORD&per_page=$PER_PAGE&page=$PAGE&sort=committer-date&order=desc" -H "Accept: application/vnd.github.v3.full+json")
   
-            if [[ $(echo "$RESPONSE" | jq -r '.message') == "Not Found" || $(echo "$RESPONSE" | jq -r '.message') == "Bad credentials" ]]; then
+            if [[ $(echo "$RESPONSE" | jq -r '.message') != "null" ]]; then
               echo "API请求失败，返回内容：$RESPONSE"
+              # 删除克隆的仓库目录
+              echo -e "\033[31m由于错误，正在删除克隆的仓库目录 $REPO_DIR\033[0m"
+              rm -rf "$REPO_DIR"
               exit 1
             fi
   
