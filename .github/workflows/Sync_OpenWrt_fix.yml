@@ -49,6 +49,8 @@ jobs:
         while :; do
           # 获取包含 "GCC14" 的提交
           RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/search/commits?q=repo:$REPO+$KEYWORD&per_page=$PER_PAGE&page=$PAGE&sort=committer-date&order=desc" -H "Accept: application/vnd.github.v3.full+json")
+          echo "$GITHUB_TOKEN"
+          echo "$RESPONSE"
           # 提取提交的 SHA 列表
           PAGE_COMMIT_LIST=$(echo "$RESPONSE" | jq -r '.items[].sha')
 
