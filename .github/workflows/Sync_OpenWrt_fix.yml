@@ -33,8 +33,9 @@ jobs:
         
         # 提取仓库名称和目录
         REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
-        REPO_DIR="$REPO_NAME_tmp"
-        
+        REPO_BASE=$(echo "$REPO_NAME" | cut -d'/' -f2)
+        REPO_DIR="openwrt_tmp/$REPO_BASE"
+        mkdir -p "$REPO_DIR"
         # 克隆仓库
         echo -e "\033[32m正在克隆仓库: $REPO\033[0m"
         git clone "https://github.com/$REPO.git" "$REPO_DIR"
