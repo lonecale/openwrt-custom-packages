@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        repo: ["openwrt/packages", "openwrt/luci"]  # 多仓库支持
+        repo: ["openwrt/openwrt","openwrt/packages", "openwrt/luci", "openwrt/routing", "openwrt/telephony"]  # 多仓库支持
 
     steps:
     # 克隆仓库并处理
