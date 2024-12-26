@@ -101,17 +101,23 @@ jobs:
             COMMIT_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
               "https://api.github.com/repos/$REPO/commits/$COMMIT_SHA")
 
+            if [[ $(echo "$COMMIT_FILES" | jq -r '.message') != "null" ]]; then
+              echo -e "\033[31mAPI请求失败，返回内容：$COMMIT_FILES\033[0m"
+              exit 1
+            fi
+
             # 检查返回的数据是否包含有效的文件变更
             FILES=$(echo "$COMMIT_FILES" | jq -r '.files | if . != null then .[].filename else empty end')
             echo -e "当前提交内文件：\n$FILES"
 
-            COMMIT_URL=$(echo "$COMMIT_FILES" | jq -r '.html_url // "No URL available"')  # 处理 null
-  
-            echo -e "\033[31m查看更多信息：\n$COMMIT_URL\033[0m"
             if [ -z "$FILES" ]; then
               echo -e "\033[33m提交\n $COMMIT_SHA \n没有修改文件，跳过该提交。\033[0m"
               continue
             fi
+
+            COMMIT_URL=$(echo "$COMMIT_FILES" | jq -r '.html_url // "No URL available"')  # 处理 null
+  
+            echo -e "\033[31m查看更多信息：\n$COMMIT_URL\033[0m"
   
             # 动态分组
             declare -A groups  # 初始化分组数组
@@ -129,7 +135,7 @@ jobs:
             # 根据最大文件路径深度调整分组深度
             if [ $max_depth -eq $DEPTH ]; then
               DEPTH=$((DEPTH-1))  # 减少一层分组深度
-              echo "\033[35m分组深度调整为 $DEPTH，重新分组完成。\033[0m"
+              echo -e "\033[35m分组深度调整为 $DEPTH，重新分组完成。\033[0m"
               unset groups
               declare -A groups
               for FILE in $FILES; do
@@ -176,9 +182,9 @@ jobs:
   
           echo -e "\033[32m仓库 '$REPO' 修改过的目录：\033[0m"
           for DIR in "${REPO_RESULTS[@]}"; do
-          echo "$REPO_DIR/$DIR"
-          echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
+            echo "$REPO_DIR/$DIR"
           done
+          echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
 
           # 创建目标目录并移动文件
           TARGET_DIR="./$REPO"
