@@ -44,7 +44,7 @@ jobs:
           REPO_DIR="openwrt_tmp/$REPO_NAME"
           mkdir -p "$REPO_DIR"
           # 克隆仓库
-          echo -e "\033[32m正在克隆仓库: $REPO\033[0m"
+          echo -e "\033[34m正在克隆仓库: $REPO\033[0m"
           git clone "https://github.com/$REPO.git" "$REPO_DIR"
           
           REPO_RESULTS=()  # 用于存储该仓库的所有公共目录路径
@@ -88,14 +88,14 @@ jobs:
   
           # 如果该仓库没有符合条件的提交，跳过该仓库
           if [ -z "$REPO_COMMIT_LIST" ]; then
-            echo -e "\033[31m仓库 '$REPO' 没有找到包含 '$KEYWORD' 的提交，跳过该仓库。\033[0m"
+            echo -e "\033[33m仓库 '$REPO' 没有找到包含 '$KEYWORD' 的提交，跳过该仓库。\033[0m"
             rm -rf "$REPO_DIR"
             continue
           fi
 
           # 处理每个提交，获取变更文件并提取目录
           for COMMIT_SHA in $REPO_COMMIT_LIST; do
-            echo -e "\033[31m正在处理提交:\n$COMMIT_SHA...\033[0m"
+            echo -e "\033[36m正在处理提交:\n$COMMIT_SHA...\033[0m"
 
             # 获取该提交的详细信息
             # COMMIT_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$REPO/commits/$COMMIT_SHA")
@@ -109,16 +109,16 @@ jobs:
 
             # 检查返回的数据是否包含有效的文件变更
             FILES=$(echo "$COMMIT_FILES" | jq -r '.files | if . != null then .[].filename else empty end')
-            echo -e "当前提交内文件：\n$FILES"
+            echo -e "\033[36m当前提交内文件：\n$FILES\033[0m"
 
             if [ -z "$FILES" ]; then
-              echo -e "\033[33m提交\n $COMMIT_SHA \n没有修改文件，跳过该提交。\033[0m"
+              echo -e "\033[31m提交 $COMMIT_SHA 没有修改文件，跳过。\033[0m"
               continue
             fi
 
             COMMIT_URL=$(echo "$COMMIT_FILES" | jq -r '.html_url // "No URL available"')  # 处理 null
   
-            echo -e "\033[31m查看更多信息：\n$COMMIT_URL\033[0m"
+            echo -e "\033[36m查看更多信息：\n$COMMIT_URL\033[0m"
   
             # 动态分组
             declare -A groups  # 初始化分组数组
@@ -126,27 +126,27 @@ jobs:
             max_depth=0
 
             for FILE in $FILES; do
-              echo "处理文件: $FILE"
+              # echo "处理文件: $FILE"
               DIR=$(dirname "$FILE")  # 提取文件的目录部分
-              echo "文件目录: $DIR"
+              # echo "文件目录: $DIR"
               # 开启调试输出，显示命令和它们的扩展结果
-              set -x
+              # set -x
               # 计算文件路径中斜杠的数量，作为深度的基础
               file_depth=$(echo "$DIR" | tr -cd '/' | wc -c)
               # 输出当前文件的目录和计算出的基础深度
-              echo "文件目录: '$DIR', 文件深度计算前斜杠数: $file_depth"
-              # 斜杠数量加一，以得到更准确的目录层级深度
-              # ((file_depth++))
-              if [ "$file_depth" -eq 0 ]; then
-                file_depth=1
-              else
+              # echo "文件目录: '$DIR', 文件深度计算前斜杠数: $file_depth"
+              #if [ "$file_depth" -eq 0 ]; then
+                #file_depth=1
+              #else
                 # 否则，斜杠数量加一，以得到更准确的目录层级深度
-                ((file_depth++))
-              fi
+                #((file_depth++))
+              #fi
+              # 斜杠数量加一，以得到更准确的目录层级深度
+              file_depth=$((file_depth == 0 ? 1 : file_depth + 1))
               # 输出最终确定的文件深度
               echo "文件深度: $file_depth"
               # 关闭调试输出
-              set +x
+              # set +x
               
               max_depth=$(($max_depth > $file_depth ? $max_depth : $file_depth))
               set +x
@@ -171,7 +171,7 @@ jobs:
 
             # 分组处理
             for prefix in "${!groups[@]}"; do
-              echo -e "\033[36m处理组:$prefix\033[0m"
+              echo -e "\033[32m处理组:$prefix\033[0m"
               # 将组内的路径读取到一个数组中
               read -a paths <<< "${groups[$prefix]}"
               # 设置初始公共路径为数组的第一个元素
@@ -227,7 +227,7 @@ jobs:
           rm -rf "$REPO_DIR"
           echo -e "\033[32m删除仓库临时目录 $REPO_DIR。\033[0m"
         done
-        echo -e "所有仓库的目录统计完成。
+        echo -e "\033[32m所有仓库的目录统计完成。\033[0m"
 
     # 提交更新
     - name: Commit Changes
