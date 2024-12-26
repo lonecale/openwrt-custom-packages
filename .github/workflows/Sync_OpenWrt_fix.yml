@@ -53,11 +53,7 @@ jobs:
           # 页数变量初始化
           PAGE=1
           PER_PAGE=100  # 每页返回的提交数
-	            
-          # 获取包含指定关键词的提交记录修改文件的相关目录
 
-
-  
           # 获取包含指定关键词的提交记录
           while :; do
             # 获取包含 "GCC14" 的提交
@@ -183,7 +179,7 @@ jobs:
           echo "$REPO_DIR/$DIR"
           echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
           done
-	  
+
           # 创建目标目录并移动文件
           TARGET_DIR="./$REPO"
           mkdir -p "$TARGET_DIR"
