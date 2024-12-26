@@ -33,10 +33,11 @@ jobs:
     # 克隆仓库并处理每个仓库
     - name: Process repositories
       run: |
+        #!/bin/bash
         # REPO=${{ matrix.repo }}
         GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
         KEYWORD="${{ env.KEYWORD }}"
-        REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")
+        REPOS=("openwrt/routing")
         for REPO in "${REPOS[@]}"; do
         # 提取仓库名称和目录
           REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
@@ -125,12 +126,18 @@ jobs:
             max_depth=0
 
             for FILE in $FILES; do
+              echo "处理文件: $FILE"
               DIR=$(dirname "$FILE")  # 提取文件的目录部分
+              echo "文件目录: $DIR"
               file_depth=$(echo "$DIR" | tr -cd '/' | wc -c)  # 计算文件路径的深度
               ((file_depth++))
+              echo "文件深度: $file_depth"
               max_depth=$(($max_depth > $file_depth ? $max_depth : $file_depth))
+              echo "当前最大深度: $max_depth"
               prefix=$(echo "$DIR" | cut -d/ -f1-$DEPTH)
+              echo "当前前缀: $prefix"
               groups["$prefix"]+="$DIR "
+              echo "目录加入分组: ${groups[$prefix]}"
             done
             # 根据最大文件路径深度调整分组深度
             if [ $max_depth -eq $DEPTH ]; then
