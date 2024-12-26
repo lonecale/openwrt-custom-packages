@@ -129,10 +129,21 @@ jobs:
               echo "处理文件: $FILE"
               DIR=$(dirname "$FILE")  # 提取文件的目录部分
               echo "文件目录: $DIR"
-              file_depth=$(echo "$DIR" | tr -cd '/' | wc -c)  # 计算文件路径的深度
+              # 开启调试输出，显示命令和它们的扩展结果
+              set -x
+              # 计算文件路径中斜杠的数量，作为深度的基础
+              file_depth=$(echo "$DIR" | tr -cd '/' | wc -c)
+              # 输出当前文件的目录和计算出的基础深度
+              echo "文件目录: '$DIR', 文件深度计算前斜杠数: $file_depth"
+              # 斜杠数量加一，以得到更准确的目录层级深度
               ((file_depth++))
+              # 输出最终确定的文件深度
               echo "文件深度: $file_depth"
+              # 关闭调试输出
+              set +x
+              
               max_depth=$(($max_depth > $file_depth ? $max_depth : $file_depth))
+              set +x
               echo "当前最大深度: $max_depth"
               prefix=$(echo "$DIR" | cut -d/ -f1-$DEPTH)
               echo "当前前缀: $prefix"
