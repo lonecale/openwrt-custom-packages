@@ -136,7 +136,13 @@ jobs:
               # 输出当前文件的目录和计算出的基础深度
               echo "文件目录: '$DIR', 文件深度计算前斜杠数: $file_depth"
               # 斜杠数量加一，以得到更准确的目录层级深度
-              ((file_depth++))
+              # ((file_depth++))
+              if [ "$file_depth" -eq 0 ]; then
+                file_depth=1
+              else
+                # 否则，斜杠数量加一，以得到更准确的目录层级深度
+                ((file_depth++))
+              fi
               # 输出最终确定的文件深度
               echo "文件深度: $file_depth"
               # 关闭调试输出
