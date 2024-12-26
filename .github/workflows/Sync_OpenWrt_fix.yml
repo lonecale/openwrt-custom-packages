@@ -13,7 +13,7 @@ jobs:
 
     # strategy:
       # matrix:
-        # repo: ["openwrt/openwrt","openwrt/packages", "openwrt/luci", "openwrt/routing", "openwrt/telephony"]  # 多仓库支持
+        # repo: ["openwrt/telephony", "openwrt/openwrt","openwrt/packages", "openwrt/routing", "openwrt/luci"]  # 多仓库支持
 
     steps:
     # 克隆仓库并处理
@@ -174,8 +174,6 @@ jobs:
             done
             unset groups  # 清理分组数据
           done
-
-          echo -e "\033[32m仓库 '$REPO' 所有提交的公共目录路径：\033[0m"
 
           # 去重并排序目录列表
           REPO_RESULTS=($(printf '%s\n' "${REPO_RESULTS[@]}" | sort -u))
