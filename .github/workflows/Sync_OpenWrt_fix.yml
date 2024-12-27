@@ -199,6 +199,9 @@ jobs:
           # 创建目标目录并移动文件
           TARGET_DIR="./$REPO"
           mkdir -p "$TARGET_DIR"
+
+          printf '%s\n' "${REPO_RESULTS[@]}" | sort -u > "$TARGET_DIR/directory_list.txt
+
           for DIR in "${REPO_RESULTS[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
             mkdir -p "$TARGET_SUB_DIR"
