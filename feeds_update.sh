@@ -17,9 +17,8 @@ svn_export() {
 # backup feeds
 shopt -s extglob
 mkdir -p /tmp/extd/
-# mv */ /tmp/extd/
-find . -maxdepth 1 ! -name 'openwrt' -exec mv {} /tmp/extd/ \;
-
+mv */ /tmp/extd/
+mv /tmp/extd/openwrt ./
 
 # download
 git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
