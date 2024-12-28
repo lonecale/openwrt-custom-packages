@@ -35,11 +35,18 @@ jobs:
             echo "changes_committed=n" >> $GITHUB_ENV
           fi
 
-      - name: Push Build
-        if: env.changes_committed != 'n'
-        id: push_openwrt_build
-        uses: peter-evans/repository-dispatch@v3
+      #- name: Push Build
+        #if: env.changes_committed != 'n'
+        #id: push_openwrt_build
+        #uses: peter-evans/repository-dispatch@v3
+        #with:
+          #token: ${{ secrets.OPENWRT_WORKFLOW_TOKEN }}
+          #repository: lonecale/openwrt-custom-packages
+          #event-type: build
+
+      - name: Cleanup Workflow
+        uses: Mattraks/delete-workflow-runs@main
         with:
-          token: ${{ secrets.OPENWRT_WORKFLOW_TOKEN }}
-          repository: lonecale/openwrt-custom-packages
-          event-type: build
+          retain_days: 0
+          keep_minimum_runs: 3
+          delete_workflow_pattern : Update OpenWrt Feeds
