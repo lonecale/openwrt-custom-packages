@@ -2,7 +2,7 @@ name: Sync OpenWrt fix
 
 on:
   schedule:
-    - cron: "20 7 * * *"  # 每天中午12点触发此工作流 (UTC时间)
+    - cron: "20 5 * * *"  # 每天13点触发此工作流
   workflow_dispatch:  # 允许手动触发工作流
 
 jobs:
