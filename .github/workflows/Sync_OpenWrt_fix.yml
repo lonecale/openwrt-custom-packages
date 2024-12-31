@@ -57,6 +57,7 @@ jobs:
 
           # 定义存储已处理提交链接的文件路径
           PROCESSED_COMMITS_FILE="./$REPO/processed_commits.txt"
+          COMMIT_URLS=""
 
           # 获取包含指定关键词的提交记录
           while :; do
@@ -100,12 +101,14 @@ jobs:
           if [ -z "$PROCESSED_COMMITS" ]; then
             echo -e "\033[33m没有已处理的提交，跳过过滤。\033[0m"
           else
+
+            # 从 URL 提取 commit ID，并将其作为已处理的提交
+            PROCESSED_COMMIT_IDS=$(echo "$PROCESSED_COMMITS" | sed -E 's#.*/commits/(.*)#\1#')
+
             echo -e "\033[33m已处理的提交：\n$PROCESSED_COMMITS\033[0m"
             
-            # 去除 REPO_COMMIT_LIST 中的多余空格和换行符
+            # 去除多余空格和换行符
             REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr -s '[:space:]' '\n' | sed '/^$/d')
-          
-            # 去除 PROCESSED_COMMITS 中的多余空格和换行符
             PROCESSED_COMMITS=$(echo "$PROCESSED_COMMITS" | tr -s '[:space:]' '\n' | sed '/^$/d')
             
             # 过滤 REPO_COMMIT_LIST，移除已处理的提交
@@ -156,7 +159,7 @@ jobs:
             fi
 
             COMMIT_URL=$(echo "$COMMIT_FILES" | jq -r '.html_url // "No URL available"')  # 处理 null
-  
+            COMMIT_URLS="$COMMIT_URLS $COMMIT_URL"
             echo -e "\033[36m查看更多信息：\n$COMMIT_URL\033[0m"
   
             # 动态分组
@@ -241,7 +244,8 @@ jobs:
 
           printf '%s\n' "${REPO_RESULTS[@]}" | sort -u > "$TARGET_DIR/directory_list.txt"
           # 将处理过的提交链接一次性写入 processed_commits.txt
-          printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
+          # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
+          printf "%s\n" $COMMIT_URLS >> "$PROCESSED_COMMITS_FILE"
           
           for DIR in "${REPO_RESULTS[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
