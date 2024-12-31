@@ -224,9 +224,7 @@ jobs:
           done
           echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
 
-          # 将处理过的提交链接一次性写入 processed_commits.txt
-          echo "$REPO_COMMIT_LIST" | tr ' ' '\n' >> "$PROCESSED_COMMITS_FILE"
-          echo -e "\033[32m已处理的提交链接已写入文件。\033[0m"
+
 
 
           # 创建目标目录并移动文件
@@ -234,7 +232,10 @@ jobs:
           mkdir -p "$TARGET_DIR"
 
           printf '%s\n' "${REPO_RESULTS[@]}" | sort -u > "$TARGET_DIR/directory_list.txt"
-
+          # 将处理过的提交链接一次性写入 processed_commits.txt
+          echo "$REPO_COMMIT_LIST" | tr ' ' '\n' >> "$TARGET_DIR/$PROCESSED_COMMITS_FILE"
+          echo -e "\033[32m已处理的提交链接已写入文件。\033[0m"
+          
           for DIR in "${REPO_RESULTS[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
             mkdir -p "$TARGET_SUB_DIR"
