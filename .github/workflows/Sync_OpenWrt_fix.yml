@@ -101,9 +101,6 @@ jobs:
             echo -e "\033[33m没有已处理的提交，跳过过滤。\033[0m"
           else
             echo -e "\033[33m已处理的提交：\n$PROCESSED_COMMITS\033[0m"
-          
-            # 确保 REPO_COMMIT_LIST 也是按行分隔的，每个提交占一行
-            echo -e "\033[33m待处理的提交：\n$REPO_COMMIT_LIST\033[0m"
             
             # 去除 REPO_COMMIT_LIST 中的多余空格和换行符
             REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr -s '[:space:]' '\n' | sed '/^$/d')
