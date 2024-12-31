@@ -56,7 +56,7 @@ jobs:
           PER_PAGE=100  # 每页返回的提交数
 
           # 定义存储已处理提交链接的文件路径
-          PROCESSED_COMMITS_FILE="./$REPO/processed_commits.txt"
+          PROCESSED_COMMITS="./$REPO/processed_commits.txt"
 
           # 获取包含指定关键词的提交记录
           while :; do
