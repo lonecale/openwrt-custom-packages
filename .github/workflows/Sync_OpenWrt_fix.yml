@@ -102,17 +102,25 @@ jobs:
           else
             echo -e "\033[33m已处理的提交：\n$PROCESSED_COMMITS\033[0m"
           
-            # 打印出待处理的所有提交
+            # 确保 REPO_COMMIT_LIST 也是按行分隔的，每个提交占一行
             echo -e "\033[33m待处理的提交：\n$REPO_COMMIT_LIST\033[0m"
-          
+            
             # 进行过滤：移除已处理的提交
-            REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -v -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
+            # 这里确保 REPO_COMMIT_LIST 中的每个提交都占一行
+            REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n')
           
-            # 打印过滤后剩下的提交
+            # 打印过滤前的 REPO_COMMIT_LIST 方便调试
+            echo -e "\033[33m过滤前的待处理提交：\n$REPO_COMMIT_LIST\033[0m"
+            
+            # 过滤 REPO_COMMIT_LIST，移除已处理的提交
+            REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | grep -v -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
+          
+            # 打印过滤后剩下的待处理提交
             echo -e "\033[33m过滤后的待处理提交：\n$REPO_COMMIT_LIST\033[0m"
           
-            # 打印跳过的提交
+            # 打印跳过的提交：已处理的提交列表与待处理提交列表的交集
             SKIPPED_COMMITS=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
+            
             if [ -n "$SKIPPED_COMMITS" ]; then
               echo -e "\033[31m跳过的提交：\n$SKIPPED_COMMITS\033[0m"
             else
