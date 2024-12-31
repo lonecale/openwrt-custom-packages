@@ -110,8 +110,7 @@ jobs:
           else
 
             # 从 URL 提取 commit ID，并将其作为已处理的提交
-            PROCESSED_COMMIT_IDS=$(echo "$PROCESSED_COMMITS" | sed -E 's#.*/commits/(.*)#\1#')
-
+            PROCESSED_COMMIT_IDS=$(echo "$PROCESSED_COMMITS" | sed -E 's#.*/commit/([a-f0-9]+)#\1#')
             echo -e "\033[33m已处理的提交：\n$PROCESSED_COMMIT_IDS\033[0m"
             
             # 去除多余空格和换行符
