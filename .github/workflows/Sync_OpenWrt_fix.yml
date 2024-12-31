@@ -89,32 +89,30 @@ jobs:
             ((PAGE++))
           done
 
-        if [ -z "$PROCESSED_COMMITS" ]; then
-          echo -e "\033[33m没有已处理的提交，跳过过滤。\033[0m"
-          # 如果文件为空，直接使用 REPO_COMMIT_LIST 不做过滤
-        else
-          # 如果文件有内容，打印已处理的提交，并进行过滤
-          echo -e "\033[33m已处理的提交：\n$PROCESSED_COMMITS\033[0m"
+          if [ -z "$PROCESSED_COMMITS" ]; then
+            echo -e "\033[33m没有已处理的提交，跳过过滤。\033[0m"
+          else
+            echo -e "\033[33m已处理的提交：\n$PROCESSED_COMMITS\033[0m"
           
-          # 打印出待处理的所有提交
-          echo -e "\033[33m待处理的提交：\n$REPO_COMMIT_LIST\033[0m"
+            # 打印出待处理的所有提交
+            echo -e "\033[33m待处理的提交：\n$REPO_COMMIT_LIST\033[0m"
           
-          # 进行过滤：移除已处理的提交
-          REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -v -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
+            # 进行过滤：移除已处理的提交
+            REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -v -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
+
+            # 打印过滤后剩下的提交
+            echo -e "\033[33m过滤后的待处理提交：\n$REPO_COMMIT_LIST\033[0m"
           
-          # 打印过滤后剩下的提交
-          echo -e "\033[33m过滤后的待处理提交：\n$REPO_COMMIT_LIST\033[0m"
-          
-          # 打印跳过的提交
-          if [ -n "$PROCESSED_COMMITS" ]; then
-            SKIPPED_COMMITS=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
-            if [ -n "$SKIPPED_COMMITS" ]; then
-              echo -e "\033[31m跳过的提交：\n$SKIPPED_COMMITS\033[0m"
-            else
-              echo -e "\033[32m没有提交被跳过。\033[0m"
+            # 打印跳过的提交
+            if [ -n "$PROCESSED_COMMITS" ]; then
+              SKIPPED_COMMITS=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
+              if [ -n "$SKIPPED_COMMITS" ]; then
+                echo -e "\033[31m跳过的提交：\n$SKIPPED_COMMITS\033[0m"
+              else
+                echo -e "\033[32m没有提交被跳过。\033[0m"
+              fi
             fi
           fi
-        fi
 
           # 如果该仓库没有符合条件的提交，跳过该仓库
           if [ -z "$REPO_COMMIT_LIST" ]; then
