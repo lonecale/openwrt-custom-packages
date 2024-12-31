@@ -241,7 +241,7 @@ jobs:
 
           printf '%s\n' "${REPO_RESULTS[@]}" | sort -u > "$TARGET_DIR/directory_list.txt"
           # 将处理过的提交链接一次性写入 processed_commits.txt
-          printf "%s\n" $REPO_COMMIT_LIST >> $PROCESSED_COMMITS_FILE"  
+          printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
           
           for DIR in "${REPO_RESULTS[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
