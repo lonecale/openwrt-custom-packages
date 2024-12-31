@@ -55,6 +55,12 @@ jobs:
           PAGE=1
           PER_PAGE=100  # 每页返回的提交数
 
+          # 定义存储已处理提交链接的文件路径
+          PROCESSED_COMMITS_FILE="./processed_commits.txt"
+
+          # 如果文件不存在，创建该文件
+          touch "$PROCESSED_COMMITS_FILE"
+
           # 获取包含指定关键词的提交记录
           while :; do
             # 获取包含 "GCC14" 的提交
@@ -85,7 +91,12 @@ jobs:
             # 继续获取下一页
             ((PAGE++))
           done
-  
+
+          # 读取已处理的提交链接，并从 REPO_COMMIT_LIST 中移除已处理的提交
+          PROCESSED_COMMITS=$(cat "$PROCESSED_COMMITS_FILE")
+          REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -v -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
+
+
           # 如果该仓库没有符合条件的提交，跳过该仓库
           if [ -z "$REPO_COMMIT_LIST" ]; then
             echo -e "\033[33m仓库 '$REPO' 没有找到包含 '$KEYWORD' 的提交，跳过该仓库。\033[0m"
@@ -96,7 +107,7 @@ jobs:
           # 处理每个提交，获取变更文件并提取目录
           for COMMIT_SHA in $REPO_COMMIT_LIST; do
             echo -e "\033[36m正在处理提交:\n$COMMIT_SHA...\033[0m"
-
+                        
             # 获取该提交的详细信息
             # COMMIT_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$REPO/commits/$COMMIT_SHA")
             COMMIT_FILES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
@@ -195,6 +206,11 @@ jobs:
             echo "$REPO_DIR/$DIR"
           done
           echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
+
+          # 将处理过的提交链接一次性写入 processed_commits.txt
+          echo "$REPO_COMMIT_LIST" | tr ' ' '\n' >> "$PROCESSED_COMMITS_FILE"
+          echo -e "\033[32m已处理的提交链接已写入文件。\033[0m"
+
 
           # 创建目标目录并移动文件
           TARGET_DIR="./$REPO"
