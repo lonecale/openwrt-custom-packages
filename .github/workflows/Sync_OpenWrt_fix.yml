@@ -105,12 +105,11 @@ jobs:
             # 确保 REPO_COMMIT_LIST 也是按行分隔的，每个提交占一行
             echo -e "\033[33m待处理的提交：\n$REPO_COMMIT_LIST\033[0m"
             
-            # 进行过滤：移除已处理的提交
-            # 这里确保 REPO_COMMIT_LIST 中的每个提交都占一行
-            REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n')
+            # 去除 REPO_COMMIT_LIST 中的多余空格和换行符
+            REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr -s '[:space:]' '\n' | sed '/^$/d')
           
-            # 打印过滤前的 REPO_COMMIT_LIST 方便调试
-            echo -e "\033[33m过滤前的待处理提交：\n$REPO_COMMIT_LIST\033[0m"
+            # 去除 PROCESSED_COMMITS 中的多余空格和换行符
+            PROCESSED_COMMITS=$(echo "$PROCESSED_COMMITS" | tr -s '[:space:]' '\n' | sed '/^$/d')
             
             # 过滤 REPO_COMMIT_LIST，移除已处理的提交
             REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | grep -v -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
@@ -127,6 +126,7 @@ jobs:
               echo -e "\033[32m没有提交被跳过。\033[0m"
             fi
           fi
+
 
           # 如果该仓库没有符合条件的提交，跳过该仓库
           if [ -z "$REPO_COMMIT_LIST" ]; then
