@@ -56,7 +56,7 @@ jobs:
           PER_PAGE=100  # 每页返回的提交数
 
           # 定义存储已处理提交链接的文件路径
-          PROCESSED_COMMITS="./$REPO/processed_commits.txt"
+          PROCESSED_COMMITS_FILE="./$REPO/processed_commits.txt"
 
           # 获取包含指定关键词的提交记录
           while :; do
@@ -89,6 +89,14 @@ jobs:
             ((PAGE++))
           done
 
+          # 从文件读取已处理的提交
+          if [ -f "$PROCESSED_COMMITS_FILE" ]; then
+            PROCESSED_COMMITS=$(cat "$PROCESSED_COMMITS_FILE")
+          else
+            PROCESSED_COMMITS=""
+          fi
+
+          # 如果没有已处理的提交，则跳过过滤
           if [ -z "$PROCESSED_COMMITS" ]; then
             echo -e "\033[33m没有已处理的提交，跳过过滤。\033[0m"
           else
@@ -99,18 +107,16 @@ jobs:
           
             # 进行过滤：移除已处理的提交
             REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -v -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
-
+          
             # 打印过滤后剩下的提交
             echo -e "\033[33m过滤后的待处理提交：\n$REPO_COMMIT_LIST\033[0m"
           
             # 打印跳过的提交
-            if [ -n "$PROCESSED_COMMITS" ]; then
-              SKIPPED_COMMITS=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
-              if [ -n "$SKIPPED_COMMITS" ]; then
-                echo -e "\033[31m跳过的提交：\n$SKIPPED_COMMITS\033[0m"
-              else
-                echo -e "\033[32m没有提交被跳过。\033[0m"
-              fi
+            SKIPPED_COMMITS=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -F -f <(echo "$PROCESSED_COMMITS") | tr '\n' ' ')
+            if [ -n "$SKIPPED_COMMITS" ]; then
+              echo -e "\033[31m跳过的提交：\n$SKIPPED_COMMITS\033[0m"
+            else
+              echo -e "\033[32m没有提交被跳过。\033[0m"
             fi
           fi
 
@@ -230,8 +236,7 @@ jobs:
 
           printf '%s\n' "${REPO_RESULTS[@]}" | sort -u > "$TARGET_DIR/directory_list.txt"
           # 将处理过的提交链接一次性写入 processed_commits.txt
-          echo "$REPO_COMMIT_LIST" | tr ' ' '\n' >> "$TARGET_DIR/$PROCESSED_COMMITS_FILE"
-          echo -e "\033[32m已处理的提交链接已写入文件。\033[0m"
+          printf "%s\n" $REPO_COMMIT_LIST >> "$TARGET_DIR/$PROCESSED_COMMITS_FILE"  
           
           for DIR in "${REPO_RESULTS[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
