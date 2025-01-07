@@ -37,8 +37,7 @@ jobs:
         # REPO=${{ matrix.repo }}
         GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
         KEYWORD="${{ env.KEYWORD }}"
-        # REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")    
-        REPOS=("openwrt/openwrt")
+        REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")
         for REPO in "${REPOS[@]}"; do
         # 提取仓库名称和目录
           REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
@@ -91,6 +90,13 @@ jobs:
             # 继续获取下一页
             ((PAGE++))
           done
+
+          # 从文件读取已处理的提交
+          if [ -f "$PROCESSED_COMMITS_FILE" ]; then
+            PROCESSED_COMMITS=$(cat "$PROCESSED_COMMITS_FILE")
+          else
+            PROCESSED_COMMITS=""
+          fi
 
           # 从文件读取已处理的提交
           if [ -f "$PROCESSED_COMMITS_FILE" ]; then
@@ -243,34 +249,18 @@ jobs:
           TARGET_DIR="./$REPO"
           mkdir -p "$TARGET_DIR"
 
-          # 检查文件是否存在
-          if [ -f "$DIRECTORY_FILE" ]; then
-            # 如果文件存在，从 DIRECTORY_FILE 读取现有的行到数组中
-            mapfile -t directory_lines < "$DIRECTORY_FILE"
-          else
-            # 如果文件不存在，初始化一个空数组
-            directory_lines=()
-          fi
+          printf '%s\n' "${REPO_RESULTS[@]}" | sort -u >> "DIRECTORY_FILE"
 
-          # 更新 DIRECTORY_FILE 并构建一个新的数组用于后续移动操作
-          declare -a updated_directory_lines
-          for repo in "${REPO_RESULTS[@]}"; do
-            if [[ ! " ${directory_lines[*]} " =~ " ${repo} " ]]; then
-              echo "$repo"
-              updated_directory_lines+=("$repo")
-            fi
-          done | sort -u >> "$DIRECTORY_FILE"
-
-
+          # 读取现有的内容到数组
+          ALL_DIRECTORIES=()
+          mapfile -t ALL_DIRECTORIES < "$DIRECTORY_FILE"
+          
           # 将处理过的提交链接一次性写入 processed_commits.txt
           # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
           printf "%s\n" $COMMIT_URLS >> "$PROCESSED_COMMITS_FILE"
-
-          # 合并原有目录和新添加的目录
-          updated_directory_lines+=("${directory_lines[@]}")
-
-          #for DIR in "${REPO_RESULTS[@]}"; do
-          for DIR in "${updated_directory_lines[@]}"; do	  
+          
+          # for DIR in "${REPO_RESULTS[@]}"; do
+          for DIR in "${ALL_DIRECTORIES[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
             mkdir -p "$TARGET_SUB_DIR"
   
@@ -281,7 +271,7 @@ jobs:
               echo -e "\033[31m目录 $REPO_DIR/$DIR 在仓库中不存在或者已经移动过，跳过此目录。\033[0m"
             fi
           done
-
+  
           # 删除仓库目录
           rm -rf "$REPO_DIR"
           echo -e "\033[32m删除仓库临时目录 $REPO_DIR。\033[0m"
