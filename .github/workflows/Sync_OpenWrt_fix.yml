@@ -122,7 +122,7 @@ jobs:
             done
 
             # 过滤 REPO_COMMIT_LIST，移除已处理的提交
-            REPO_COMMIT_LIST=($(printf '%s\n' "${REPO_COMMIT_LIST[@]}" | grep -v -F -f <(printf '%s\n' "${PROCESSED_COMMIT_IDS[@]}")))
+            REPO_COMMIT_LIST=($(printf '%s\n' "${REPO_COMMIT_LIST[@]}" | grep -v -F -f <(printf '%s\n' "${PROCESSED_COMMIT_IDS[@]}") || true))
 
             # 如果该仓库没有符合条件的提交，跳过该仓库
             if [ "${#REPO_COMMIT_LIST[@]}" -eq 0 ]; then
