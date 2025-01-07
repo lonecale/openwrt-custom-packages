@@ -1,4 +1,3 @@
-
 name: Sync OpenWrt fix
 
 on:
@@ -38,7 +37,7 @@ jobs:
         # REPO=${{ matrix.repo }}
         GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
         KEYWORD="${{ env.KEYWORD }}"
-        # REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")
+        # REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")    
         REPOS=("openwrt/openwrt")
         for REPO in "${REPOS[@]}"; do
         # 提取仓库名称和目录
@@ -253,38 +252,23 @@ jobs:
             directory_lines=()
           fi
 
-          # 使用关联数组避免重复添加目录
-          declare -A directory_map
-          for dir in "${directory_lines[@]}"; do
-              directory_map["$dir"]=1  # 标记已存在的目录
-              echo -e "Existing directory added to map: $dir"    
-          done
-
-          # 更新 DIRECTORY_FILE 并更新目录映射
+          # 更新 DIRECTORY_FILE 并构建一个新的数组用于后续移动操作
+          declare -a updated_directory_lines
           for repo in "${REPO_RESULTS[@]}"; do
-            if [[ ! ${directory_map["$repo"]} ]]; then
-              echo "Adding new directory: $repo"
+            if [[ ! " ${directory_lines[*]} " =~ " ${repo} " ]]; then
               echo "$repo"
-              directory_map["$repo"]=1  # 标记新目录
-            else
-              echo "Directory already exists, skipping: $repo"
+              updated_directory_lines+=("$repo")
             fi
           done | sort -u >> "$DIRECTORY_FILE"
 
-          # 输出关联数组的最终状态
-          echo "Final state of directory map:"
-          for k in "${!directory_map[@]}"; do
-            echo "Key: $k"
-          done
-          
+
           # 将处理过的提交链接一次性写入 processed_commits.txt
           # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
           printf "%s\n" $COMMIT_URLS >> "$PROCESSED_COMMITS_FILE"
 
-          # 使用关联数组的键创建一个更新后的目录列表
-          updated_directory_lines=("${!directory_map[@]}")
-          echo "Updated directory lines: ${updated_directory_lines[@]}"
-          # 移动目录
+          # 合并原有目录和新添加的目录
+          updated_directory_lines+=("${directory_lines[@]}")
+
           #for DIR in "${REPO_RESULTS[@]}"; do
           for DIR in "${updated_directory_lines[@]}"; do	  
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
