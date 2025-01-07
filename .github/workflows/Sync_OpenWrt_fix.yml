@@ -242,21 +242,38 @@ jobs:
           TARGET_DIR="./$REPO"
           mkdir -p "$TARGET_DIR"
 
-          # 从 DIRECTORY_FILE 读取现有的行到数组中
-          mapfile -t existing_lines < "$DIRECTORY_FILE"
+          # 检查文件是否存在
+          if [ -f "$DIRECTORY_FILE" ]; then
+            # 如果文件存在，从 DIRECTORY_FILE 读取现有的行到数组中
+            mapfile -t directory_lines < "$DIRECTORY_FILE"
+          else
+            # 如果文件不存在，初始化一个空数组
+            directory_lines=()
+          fi
 
-          # 逐行检查 REPO_RESULTS 是否已存在，若不存在则追加到文件directory_list.txt
+          # 使用关联数组避免重复添加目录
+          declare -A directory_map
+          for dir in "${directory_lines[@]}"; do
+              directory_map["$dir"]=1  # 标记已存在的目录
+          done
+          # 更新 DIRECTORY_FILE 并更新目录映射
           for repo in "${REPO_RESULTS[@]}"; do
-            if [[ ! " ${existing_lines[*]} " =~ " ${repo} " ]]; then
+            if [[ ! ${directory_map["$repo"]} ]]; then
               echo "$repo"
+              directory_map["$repo"]=1  # 标记新目录
             fi
           done | sort -u >> "$DIRECTORY_FILE"
+
 
           # 将处理过的提交链接一次性写入 processed_commits.txt
           # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
           printf "%s\n" $COMMIT_URLS >> "$PROCESSED_COMMITS_FILE"
-          
-          for DIR in "${REPO_RESULTS[@]}"; do
+
+          # 使用关联数组的键创建一个更新后的目录列表
+          updated_directory_lines=("${!directory_map[@]}")
+          # 移动目录
+          #for DIR in "${REPO_RESULTS[@]}"; do
+          for DIR in "${updated_directory_lines[@]}"; do	  
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
             mkdir -p "$TARGET_SUB_DIR"
   
@@ -267,7 +284,7 @@ jobs:
               echo -e "\033[31m目录 $REPO_DIR/$DIR 在仓库中不存在或者已经移动过，跳过此目录。\033[0m"
             fi
           done
-  
+
           # 删除仓库目录
           rm -rf "$REPO_DIR"
           echo -e "\033[32m删除仓库临时目录 $REPO_DIR。\033[0m"
