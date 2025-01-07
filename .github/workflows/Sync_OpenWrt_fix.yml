@@ -50,7 +50,7 @@ jobs:
           REPO_RESULTS=()  # 用于存储该仓库的所有公共目录路径
 
           # 初始化该仓库的提交列表
-          REPO_COMMIT_LIST=""
+          REPO_COMMIT_LIST=()
           # 页数变量初始化
           PAGE=1
           PER_PAGE=100  # 每页返回的提交数
@@ -58,7 +58,8 @@ jobs:
           # 定义存储已处理提交链接的文件路径
           PROCESSED_COMMITS_FILE="./$REPO/processed_commits.txt"
           DIRECTORY_FILE="./$REPO/directory_list.txt"
-          COMMIT_URLS=""
+          # 初始化该仓库的提交链接列表
+          COMMIT_URLS=()
 
           # 获取包含指定关键词的提交记录
           while :; do
@@ -77,15 +78,15 @@ jobs:
             fi
   
             # 提取提交的 SHA 列表
-            PAGE_COMMIT_LIST=$(echo "$RESPONSE" | jq -r '.items[].sha')
-  
+            PAGE_COMMIT_LIST=($(echo "$RESPONSE" | jq -r '.items[].sha'))
             # 如果没有返回任何提交，退出循环
-            if [ -z "$PAGE_COMMIT_LIST" ]; then
+            if [ "${#PAGE_COMMIT_LIST[@]}" -eq 0 ]; then
               break
             fi
   
             # 将当前页的提交加入该仓库的提交列表
-            REPO_COMMIT_LIST="$REPO_COMMIT_LIST $PAGE_COMMIT_LIST"
+
+            REPO_COMMIT_LIST+=("${PAGE_COMMIT_LIST[@]}")
             echo -e "\033[33m搜索到仓库 '$REPO' 的提交: \n$PAGE_COMMIT_LIST\033[0m"
             # 继续获取下一页
             ((PAGE++))
@@ -93,57 +94,50 @@ jobs:
 
           # 从文件读取已处理的提交
           if [ -f "$PROCESSED_COMMITS_FILE" ]; then
-            PROCESSED_COMMITS=$(cat "$PROCESSED_COMMITS_FILE")
+            mapfile -t PROCESSED_COMMITS < "$PROCESSED_COMMITS_FILE"
           else
-            PROCESSED_COMMITS=""
-          fi
-
-          # 从文件读取已处理的提交
-          if [ -f "$PROCESSED_COMMITS_FILE" ]; then
-            PROCESSED_COMMITS=$(cat "$PROCESSED_COMMITS_FILE")
-          else
-            PROCESSED_COMMITS=""
+            PROCESSED_COMMITS=()
           fi
 
           # 如果没有已处理的提交，则跳过过滤
-          if [ -z "$PROCESSED_COMMITS" ]; then
+          if [ "${#PROCESSED_COMMITS[@]}" -eq 0 ]; then
             echo -e "\033[33m没有已处理的提交，跳过过滤。\033[0m"
           else
+            # 提取已处理提交的 SHA 并存入数组
+            PROCESSED_COMMIT_IDS=()
+            for COMMIT_URL in "${PROCESSED_COMMITS[@]}"; do
+              if [[ "$COMMIT_URL" =~ .*/commit/([a-f0-9]+)$ ]]; then
+                PROCESSED_COMMIT_IDS+=("${BASH_REMATCH[1]}")
+              else
+                echo -e "\033[31m警告：无法从 URL 提取提交 SHA：$COMMIT_URL\033[0m"
+              fi
+            done
 
-            # 从 URL 提取 commit ID，并将其作为已处理的提交
-            PROCESSED_COMMIT_IDS=$(echo "$PROCESSED_COMMITS" | sed -E 's#.*/commit/([a-f0-9]+)#\1#')
-            echo -e "\033[33m已处理的提交：\n$PROCESSED_COMMIT_IDS\033[0m"
-            
-            # 去除多余空格和换行符
-            REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | tr -s '[:space:]' '\n' | sed '/^$/d')
-            PROCESSED_COMMIT_IDS=$(echo "$PROCESSED_COMMIT_IDS" | tr -s '[:space:]' '\n' | sed '/^$/d')
-            
+            echo -e "\033[33m已处理的提交：\033[0m"
+            for commit_id in "${PROCESSED_COMMIT_IDS[@]}"; do
+              echo -e "\033[33m- $commit_id\033[0m"
+            done
+
             # 过滤 REPO_COMMIT_LIST，移除已处理的提交
-            REPO_COMMIT_LIST=$(echo "$REPO_COMMIT_LIST" | grep -v -F -f <(echo "$PROCESSED_COMMIT_IDS") | tr '\n' ' ')
-          
+            REPO_COMMIT_LIST=($(printf '%s\n' "${REPO_COMMIT_LIST[@]}" | grep -v -F -f <(printf '%s\n' "${PROCESSED_COMMIT_IDS[@]}")))
+
+
             # 打印过滤后剩下的待处理提交
-            echo -e "\033[33m过滤后的待处理提交：\n$REPO_COMMIT_LIST\033[0m"
-          
-            # 打印跳过的提交：已处理的提交列表与待处理提交列表的交集
-            SKIPPED_COMMITS=$(echo "$REPO_COMMIT_LIST" | tr ' ' '\n' | grep -F -f <(echo "$PROCESSED_COMMIT_IDS") | tr '\n' ' ')
-            
-            if [ -n "$SKIPPED_COMMITS" ]; then
-              echo -e "\033[31m跳过的提交：\n$SKIPPED_COMMITS\033[0m"
-            else
-              echo -e "\033[32m没有提交被跳过。\033[0m"
-            fi
+            echo -e "\033[33m过滤后的待处理提交：\033[0m"
+            for commit_id in "${REPO_COMMIT_LIST[@]}"; do
+              echo -e "\033[33m- $commit_id\033[0m"
+            done
           fi
 
-
           # 如果该仓库没有符合条件的提交，跳过该仓库
-          if [ -z "$REPO_COMMIT_LIST" ]; then
+          if [ "${#REPO_COMMIT_LIST[@]}" -eq 0 ]; then
             echo -e "\033[33m仓库 '$REPO' 没有找到包含 '$KEYWORD' 的提交，跳过该仓库。\033[0m"
             rm -rf "$REPO_DIR"
             continue
           fi
 
           # 处理每个提交，获取变更文件并提取目录
-          for COMMIT_SHA in $REPO_COMMIT_LIST; do
+          for COMMIT_SHA in "${REPO_COMMIT_LIST[@]}"; do
             echo -e "\033[36m正在处理提交:\n$COMMIT_SHA...\033[0m"
                         
             # 获取该提交的详细信息
@@ -166,7 +160,7 @@ jobs:
             fi
 
             COMMIT_URL=$(echo "$COMMIT_FILES" | jq -r '.html_url // "No URL available"')  # 处理 null
-            COMMIT_URLS="$COMMIT_URLS $COMMIT_URL"
+            COMMIT_URLS+=("$COMMIT_URL")
             echo -e "\033[36m查看更多信息：\n$COMMIT_URL\033[0m"
   
             # 动态分组
@@ -186,7 +180,7 @@ jobs:
               file_depth=$((file_depth == 0 ? 1 : file_depth + 1))
               # 输出最终确定的文件深度
               # echo "文件深度: $file_depth"              
-              max_depth=$(($max_depth > $file_depth ? $max_depth : $file_depth))
+              max_depth=$((max_depth > file_depth ? max_depth : file_depth))
               # echo "当前最大深度: $max_depth"
               prefix=$(echo "$DIR" | cut -d/ -f1-$DEPTH)
               # echo "当前前缀: $prefix"
@@ -194,7 +188,7 @@ jobs:
               # echo "目录加入分组: ${groups[$prefix]}"
             done
             # 根据最大文件路径深度调整分组深度
-            if [ $max_depth -eq $DEPTH ]; then
+            if [ $max_depth -eq $DEPTH ] && [ $DEPTH -gt 1 ]; then
               DEPTH=$((DEPTH-1))  # 减少一层分组深度
               echo -e "\033[35m分组深度调整为 $DEPTH，重新分组完成。\033[0m"
               unset groups
@@ -256,20 +250,20 @@ jobs:
           mapfile -t ALL_DIRECTORIES < "$DIRECTORY_FILE"
           
           # 将处理过的提交链接一次性写入 processed_commits.txt
-          # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
-          printf "%s\n" $COMMIT_URLS >> "$PROCESSED_COMMITS_FILE"
+          # printf '%s\n' "${REPO_COMMIT_LIST[@]}" >> "$PROCESSED_COMMITS_FILE"
+          printf '%s\n' "${COMMIT_URLS[@]}" >> "$PROCESSED_COMMITS_FILE"
           
           # for DIR in "${REPO_RESULTS[@]}"; do
           for DIR in "${ALL_DIRECTORIES[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
             mkdir -p "$TARGET_SUB_DIR"
-  
-            if [ -d "$REPO_DIR/$DIR" ]; then
-              echo -e "\033[32m移动目录 $REPO_DIR/$DIR 中的文件...\033[0m"
-              mv "$REPO_DIR/$DIR"/* "$TARGET_SUB_DIR" 2>/dev/null || true
+
+            if [ -d "$REPO_DIR/$DIR" ] && [ "$(ls -A "$REPO_DIR/$DIR" 2>/dev/null)" ]; then
+              mv "$REPO_DIR/$DIR"/* "$TARGET_SUB_DIR"
             else
-              echo -e "\033[31m目录 $REPO_DIR/$DIR 在仓库中不存在或者已经移动过，跳过此目录。\033[0m"
+              echo -e "\033[31m目录 $REPO_DIR/$DIR 为空或不存在，跳过。\033[0m"
             fi
+
           done
   
           # 删除仓库目录
