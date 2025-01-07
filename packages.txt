@@ -19,5 +19,4 @@ luci-app-wechatpush
 luci-theme-kucat
 lucky
 netdata-ssl
-openwrt
 smartdns
