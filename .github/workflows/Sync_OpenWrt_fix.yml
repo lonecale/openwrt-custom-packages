@@ -38,7 +38,7 @@ jobs:
         GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
         KEYWORD="${{ env.KEYWORD }}"
         #REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")
-        #REPOS=("openwrt/openwrt")
+        REPOS=("openwrt/openwrt")
         for REPO in "${REPOS[@]}"; do
         # 提取仓库名称和目录
           REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
