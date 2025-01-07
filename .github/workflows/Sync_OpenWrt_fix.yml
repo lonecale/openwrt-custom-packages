@@ -57,7 +57,6 @@ jobs:
 
           # 定义存储已处理提交链接的文件路径
           PROCESSED_COMMITS_FILE="./$REPO/processed_commits.txt"
-          DIRECTORY_FILE="./$REPO/directory_list.txt"
           COMMIT_URLS=""
 
           # 获取包含指定关键词的提交记录
@@ -90,6 +89,13 @@ jobs:
             # 继续获取下一页
             ((PAGE++))
           done
+
+          # 从文件读取已处理的提交
+          if [ -f "$PROCESSED_COMMITS_FILE" ]; then
+            PROCESSED_COMMITS=$(cat "$PROCESSED_COMMITS_FILE")
+          else
+            PROCESSED_COMMITS=""
+          fi
 
           # 从文件读取已处理的提交
           if [ -f "$PROCESSED_COMMITS_FILE" ]; then
@@ -242,48 +248,12 @@ jobs:
           TARGET_DIR="./$REPO"
           mkdir -p "$TARGET_DIR"
 
-          # 检查文件是否存在
-          if [ -f "$DIRECTORY_FILE" ]; then
-            # 如果文件存在，从 DIRECTORY_FILE 读取现有的行到数组中
-            mapfile -t directory_lines < "$DIRECTORY_FILE"
-          else
-            # 如果文件不存在，初始化一个空数组
-            directory_lines=()
-          fi
-
-          # 使用关联数组避免重复添加目录
-          declare -A directory_map
-          for dir in "${directory_lines[@]}"; do
-              directory_map["$dir"]=1  # 标记已存在的目录
-              echo "Existing directory added to map: $dir"
-          done
-          # 更新 DIRECTORY_FILE 并更新目录映射
-          for repo in "${REPO_RESULTS[@]}"; do
-            if [[ ! ${directory_map["$repo"]} ]]; then
-              echo "Adding new directory: $repo"
-              echo "$repo"
-              directory_map["$repo"]=1  # 标记新目录
-            else
-              echo "Directory already exists, skipping: $repo"
-            fi
-          done | sort -u >> "$DIRECTORY_FILE"
-
-          # 输出关联数组的最终状态
-          echo "Final state of directory map:"
-          for k in "${!directory_map[@]}"; do
-            echo "Key: $k"
-          done
-
+          printf '%s\n' "${REPO_RESULTS[@]}" | sort -u > "$TARGET_DIR/directory_list.txt"
           # 将处理过的提交链接一次性写入 processed_commits.txt
           # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
           printf "%s\n" $COMMIT_URLS >> "$PROCESSED_COMMITS_FILE"
-
-          # 使用关联数组的键创建一个更新后的目录列表
-          updated_directory_lines=("${!directory_map[@]}")
-	  echo "Updated directory lines: ${updated_directory_lines[@]}"
-          # 移动目录
-          #for DIR in "${REPO_RESULTS[@]}"; do
-          for DIR in "${updated_directory_lines[@]}"; do	  
+          
+          for DIR in "${REPO_RESULTS[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
             mkdir -p "$TARGET_SUB_DIR"
   
@@ -294,7 +264,7 @@ jobs:
               echo -e "\033[31m目录 $REPO_DIR/$DIR 在仓库中不存在或者已经移动过，跳过此目录。\033[0m"
             fi
           done
-
+  
           # 删除仓库目录
           rm -rf "$REPO_DIR"
           echo -e "\033[32m删除仓库临时目录 $REPO_DIR。\033[0m"
