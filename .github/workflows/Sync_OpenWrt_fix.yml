@@ -37,7 +37,8 @@ jobs:
         # REPO=${{ matrix.repo }}
         GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
         KEYWORD="${{ env.KEYWORD }}"
-        REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")
+        #REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")
+        #REPOS=("openwrt/openwrt")
         for REPO in "${REPOS[@]}"; do
         # 提取仓库名称和目录
           REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
@@ -255,15 +256,24 @@ jobs:
           declare -A directory_map
           for dir in "${directory_lines[@]}"; do
               directory_map["$dir"]=1  # 标记已存在的目录
+              echo "Existing directory added to map: $dir"
           done
           # 更新 DIRECTORY_FILE 并更新目录映射
           for repo in "${REPO_RESULTS[@]}"; do
             if [[ ! ${directory_map["$repo"]} ]]; then
+              echo "Adding new directory: $repo"
               echo "$repo"
               directory_map["$repo"]=1  # 标记新目录
+            else
+              echo "Directory already exists, skipping: $repo"
             fi
           done | sort -u >> "$DIRECTORY_FILE"
 
+          # 输出关联数组的最终状态
+          echo "Final state of directory map:"
+          for k in "${!directory_map[@]}"; do
+            echo "Key: $k"
+          done
 
           # 将处理过的提交链接一次性写入 processed_commits.txt
           # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
@@ -271,6 +281,7 @@ jobs:
 
           # 使用关联数组的键创建一个更新后的目录列表
           updated_directory_lines=("${!directory_map[@]}")
+	  echo "Updated directory lines: ${updated_directory_lines[@]}"
           # 移动目录
           #for DIR in "${REPO_RESULTS[@]}"; do
           for DIR in "${updated_directory_lines[@]}"; do	  
