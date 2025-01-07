@@ -249,7 +249,7 @@ jobs:
           TARGET_DIR="./$REPO"
           mkdir -p "$TARGET_DIR"
 
-          printf '%s\n' "${REPO_RESULTS[@]}" | sort -u >> "DIRECTORY_FILE"
+          printf '%s\n' "${REPO_RESULTS[@]}" | sort -u >> "$DIRECTORY_FILE"
 
           # 读取现有的内容到数组
           ALL_DIRECTORIES=()
