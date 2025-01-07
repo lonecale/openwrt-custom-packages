@@ -38,7 +38,8 @@ jobs:
         # REPO=${{ matrix.repo }}
         GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
         KEYWORD="${{ env.KEYWORD }}"
-        REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")
+        # REPOS=("openwrt/openwrt" "openwrt/packages" "openwrt/luci" "openwrt/routing" "openwrt/telephony")
+        REPOS=("openwrt/openwrt")
         for REPO in "${REPOS[@]}"; do
         # 提取仓库名称和目录
           REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
@@ -265,10 +266,17 @@ jobs:
               echo "Adding new directory: $repo"
               echo "$repo"
               directory_map["$repo"]=1  # 标记新目录
+            else
+              echo "Directory already exists, skipping: $repo"
             fi
           done | sort -u >> "$DIRECTORY_FILE"
 
-
+          # 输出关联数组的最终状态
+          echo "Final state of directory map:"
+          for k in "${!directory_map[@]}"; do
+            echo "Key: $k"
+          done
+          
           # 将处理过的提交链接一次性写入 processed_commits.txt
           # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
           printf "%s\n" $COMMIT_URLS >> "$PROCESSED_COMMITS_FILE"
