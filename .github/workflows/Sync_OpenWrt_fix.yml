@@ -87,16 +87,19 @@ jobs:
             # 将当前页的提交加入该仓库的提交列表
 
             REPO_COMMIT_LIST+=("${PAGE_COMMIT_LIST[@]}")
-            echo -e "\033[33m搜索到仓库 '$REPO' 的提交: \n$PAGE_COMMIT_LIST\033[0m"
+
+            echo -e "\033[33m搜索到仓库：\033[0m"
+            for commit_id in "${REPO_COMMIT_LIST[@]}"; do
+              echo -e "\033[33m- $commit_id\033[0m"
+            done
             # 继续获取下一页
             ((PAGE++))
           done
 
           # 从文件读取已处理的提交
+          PROCESSED_COMMITS=()
           if [ -f "$PROCESSED_COMMITS_FILE" ]; then
             mapfile -t PROCESSED_COMMITS < "$PROCESSED_COMMITS_FILE"
-          else
-            PROCESSED_COMMITS=()
           fi
 
           # 如果没有已处理的提交，则跳过过滤
