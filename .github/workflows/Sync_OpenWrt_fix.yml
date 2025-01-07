@@ -57,6 +57,7 @@ jobs:
 
           # 定义存储已处理提交链接的文件路径
           PROCESSED_COMMITS_FILE="./$REPO/processed_commits.txt"
+          DIRECTORY_FILE="./$REPO/directory_list.txt"
           COMMIT_URLS=""
 
           # 获取包含指定关键词的提交记录
@@ -89,13 +90,6 @@ jobs:
             # 继续获取下一页
             ((PAGE++))
           done
-
-          # 从文件读取已处理的提交
-          if [ -f "$PROCESSED_COMMITS_FILE" ]; then
-            PROCESSED_COMMITS=$(cat "$PROCESSED_COMMITS_FILE")
-          else
-            PROCESSED_COMMITS=""
-          fi
 
           # 从文件读取已处理的提交
           if [ -f "$PROCESSED_COMMITS_FILE" ]; then
@@ -248,7 +242,16 @@ jobs:
           TARGET_DIR="./$REPO"
           mkdir -p "$TARGET_DIR"
 
-          printf '%s\n' "${REPO_RESULTS[@]}" | sort -u > "$TARGET_DIR/directory_list.txt"
+          # 从 DIRECTORY_FILE 读取现有的行到数组中
+          mapfile -t existing_lines < "$DIRECTORY_FILE"
+
+          # 逐行检查 REPO_RESULTS 是否已存在，若不存在则追加到文件directory_list.txt
+          for repo in "${REPO_RESULTS[@]}"; do
+            if [[ ! " ${existing_lines[*]} " =~ " ${repo} " ]]; then
+              echo "$repo"
+            fi
+          done | sort -u >> "$DIRECTORY_FILE"
+
           # 将处理过的提交链接一次性写入 processed_commits.txt
           # printf "%s\n" $REPO_COMMIT_LIST >> "$PROCESSED_COMMITS_FILE"
           printf "%s\n" $COMMIT_URLS >> "$PROCESSED_COMMITS_FILE"
