@@ -283,6 +283,7 @@ jobs:
 
           # 使用关联数组的键创建一个更新后的目录列表
           updated_directory_lines=("${!directory_map[@]}")
+          echo "Updated directory lines: ${updated_directory_lines[@]}"
           # 移动目录
           #for DIR in "${REPO_RESULTS[@]}"; do
           for DIR in "${updated_directory_lines[@]}"; do	  
