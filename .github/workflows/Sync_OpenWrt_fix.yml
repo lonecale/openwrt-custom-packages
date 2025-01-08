@@ -88,10 +88,9 @@ jobs:
 
             REPO_COMMIT_LIST+=("${PAGE_COMMIT_LIST[@]}")
 
-            echo -e "\033[33m搜索到仓库：\033[0m"
-            for commit_id in "${REPO_COMMIT_LIST[@]}"; do
-              echo -e "\033[33m- $commit_id\033[0m"
-            done
+            echo -e "\033[33m搜索到仓库提交：\033[0m"
+            printf '\033[33m- %s\033[0m\n' "${REPO_COMMIT_LIST[@]}"
+
             # 继续获取下一页
             ((PAGE++))
           done
@@ -117,23 +116,19 @@ jobs:
             done
 
             echo -e "\033[33m已处理的提交：\033[0m"
-            for commit_id in "${PROCESSED_COMMIT_IDS[@]}"; do
-              echo -e "\033[33m- $commit_id\033[0m"
-            done
+            printf '\033[33m- %s\033[0m\n' "${PROCESSED_COMMIT_IDS[@]}"
 
             # 过滤 REPO_COMMIT_LIST，移除已处理的提交
             REPO_COMMIT_LIST=($(printf '%s\n' "${REPO_COMMIT_LIST[@]}" | grep -v -F -f <(printf '%s\n' "${PROCESSED_COMMIT_IDS[@]}") || true))
 
             # 打印过滤后剩下的待处理提交
             echo -e "\033[33m过滤后的待处理提交：\033[0m"
-            for commit_id in "${REPO_COMMIT_LIST[@]}"; do
-              echo -e "\033[33m- $commit_id\033[0m"
-            done
+            printf '\033[33m- %s\033[0m\n' "${REPO_COMMIT_LIST[@]}"
           fi
           
           # 如果该仓库没有符合条件的提交，跳过该仓库
           if [ "${#REPO_COMMIT_LIST[@]}" -eq 0 ]; then
-              echo -e "\033[33m仓库 '$REPO' 没有找到包含 '$KEYWORD' 的提交，跳过该仓库。\033[0m"
+              echo -e "\033[33m仓库 '$REPO' 没有找到包含 '$KEYWORD' 的需要处理的提交，跳过该仓库。\033[0m"
               rm -rf "$REPO_DIR"
               continue
           fi
@@ -236,9 +231,7 @@ jobs:
           REPO_RESULTS=($(printf '%s\n' "${REPO_RESULTS[@]}" | sort -u))
   
           echo -e "\033[32m仓库 '$REPO' 修改过的目录：\033[0m"
-          for DIR in "${REPO_RESULTS[@]}"; do
-            echo "$REPO_DIR/$DIR"
-          done
+          printf '%s\n' "${REPO_RESULTS[@]}"
           echo -e "\033[32m$REPO 所有目录统计完成。\033[0m"
 
           # 创建目标目录并移动文件
