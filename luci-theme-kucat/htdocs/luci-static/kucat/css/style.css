@@ -35,14 +35,12 @@
     --menu-hover-color: #fff;
     --menu-item-color: #5a636b;
     --menu-item-titlebg-color: rgba(var(--primary-rgbm),0.22);
-    --menu-item-hover-bgcolor: rgba(248,248,248, 0.2);
+    --menu-barbgcolor: rgba(var(--primary-rgbm), var(--primary-rgbm-ts));
     --body-text-color: #3c4655;
     --body-color: #65656b;
     --inputbg-color: rgba(248,248,248,0.15);
     --inputtext-color: #4d5256;
     --inputborder-color: rgba(0,0,0,0.2);
-    --input-hover-color: #fff;
-    --input-hover-bgcolor: rgba(248,248,248,0.5);
     --input-bgcolor: rgba(255,255,255,0.6);
     --input-boxcolor: rgba(0, 0, 0, 0.12);
     --input-boxhovercolor: rgba(0, 0, 0, 0.22);
@@ -58,14 +56,12 @@
     --menu-hover-color: #e9eff3;
     --menu-item-color: #b4c9e3;
     --menu-item-titlebg-color: rgba(var(--primary-rgbm),0.4);
-    --menu-item-hover-bgcolor: rgba(255, 255, 255, 0.2);
+    --menu-barbgcolor: rgba(var(--primary-rgbm), var(--primary-rgbm-ts));
     --body-text-color: #8391a2;
     --body-color: #8b8e91;
     --inputbg-color: rgba(255,255,255,0.11);
     --inputtext-color: #bbb;
     --inputborder-color: rgba(255,255,255,0.2);
-    --input-hover-color: #ccc;
-    --input-hover-bgcolor: rgba(255,255,255,0.22);
     --input-bgcolor: rgba(0,0,0,0.2);
     --input-boxcolor: rgba(255,255,255,0.15);
     --input-boxhovercolor: rgba(255, 255, 255, 0.22);
@@ -205,7 +201,7 @@ html, body {
 	padding: 0 !important;
 }
 body {
-	letter-spacing: 0.050em;
+	letter-spacing: 0.05em;
 	font-size: var(--font-z);
 	color: var(--body-color);
 	background-position: top center;
@@ -214,9 +210,6 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 	background-repeat: no-repeat;
-}
-body div {
-	line-height: 120%
 }
 
 a {
@@ -297,7 +290,6 @@ select, .cbi-dropdown {
 select option {
 	background-color: rgba(var(--primary-rgbbody), 0.8);
 	width: 100%!important;
-	height: 2rem;
 	overflow: hidden;
 }
 
@@ -457,12 +449,12 @@ small {
     text-decoration:none
 }
 .container-bar-right .labelbar:hover::before, .container-bar-left .labelbar:hover::before {
-      color: var(--menu-color);
+      color: var(--menu-hover-color);
 	text-decoration: none
 }
 
 .container-bar-right .labelbar::before,.container-bar-left .labelbar::before {
-      color: var(--menu-color);
+    color: var(--menu-color);
     font-size: 2rem !important;
     text-decoration: none
 }
@@ -508,6 +500,7 @@ small {
 }
 .main > .loading {
 	position: fixed;
+	display: none;
 	top: 0;
 	opacity: 1;
 	visibility: visible;
@@ -519,8 +512,7 @@ small {
 	float: left;
 	width: calc(0% + 17rem);
 	height: 100%;
-	background-color: rgba(var(--primary-rgbm), var(--primary-rgbm-ts));
-	background-image: var(--bgqs-image);
+	background-color: var(--menu-bgcolor);
 	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.14), 0 -2px 3px 1px rgba(0, 0, 0, 0.32), 0 0px 5px 2px rgba(0, 0, 0, 0.2);
 	overflow-x: auto;
 	position: fixed;
@@ -528,12 +520,12 @@ small {
 }
 .main .main-left .sidenav-header {
 	text-align: center;
-	height: 4.8rem;
-	margin: 0 10px;
-	background-color: rgba(255, 255, 255, 0);
+	height: 4.8rem; 
+	margin: 0;
+	background-color: var(--menu-barbgcolor);
 	padding: 2rem;
 	background-clip: padding-box;
-	border-bottom: 1px solid #ddd
+	border-bottom: 1px solid #ddd;
 }
 .main-right {
 	width: calc(100% - 17rem);
@@ -543,7 +535,7 @@ small {
 .main-right > #maincontent {
 	position: relative;
 	background-color: rgba(var(--primary-rgbbody), var(--primary-rgbm-ts));
-	padding: 1rem 1.25rem 3rem 1.25rem;
+	padding: 0.2rem 0.2rem 3rem 0.2rem;
 	z-index: 50
 }
 
@@ -558,8 +550,7 @@ small {
 }
 
 header.pd-primary {
-	background-color: rgba(var(--primary-rgbm), var(--primary-rgbm-ts));
-	background-image: var(--bgqs-image);
+	background-color: var(--menu-barbgcolor);
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.35); 
 	background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent) !important;
 
@@ -782,9 +773,6 @@ text-decoration: none!important;
 }
 /*   menu */
 
-.main .main-left .nav {
-	margin-top: .5rem
-}
 .slide-menu {
 	overflow: hidden
 }
@@ -792,9 +780,9 @@ text-decoration: none!important;
 .main .main-left .nav>li>a:first-child {
     display: block;
     font-size: var(--font-d);
-    color: var(--menu-color);
+    color: var(--menu-fontcolor);
     padding: .8rem 0rem .8rem 3rem;
-    margin-bottom: 0.1rem;
+    margin-bottom: 1px;
     font-weight: 500;
     display: flex;
     width: 100%;
@@ -832,7 +820,7 @@ text-decoration: none!important;
 	position: absolute;
 	left: .8rem;
 	content: "\e91a";
-	color: var(--menu-color)
+	color: var(--menu-fontcolor)
 }
 
 .main .main-left .nav>.slide>a::after, .main .main-left>.nav>li>a::after {
@@ -844,7 +832,7 @@ text-decoration: none!important;
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
-	color: var(--menu-color);
+	color: var(--menu-fontcolor);
 	content: '\e20b';
 	transition: all .1s ease;
 	-moz-osx-font-smoothing: grayscale;
@@ -854,7 +842,7 @@ text-decoration: none!important;
 }
 .main .main-left .nav>li>a:hover a::after, .main .main-left>.nav>li>a.active a::after {
 	cursor: pointer;
-	color: var(--menu-color);
+	color: var(--menu-hover-color);
 	width: 100%
 }
 .main>.main-left .nav>.slide>a.active::before, .main .main-left .nav>li>a:hover::after, .main .main-left .nav>li>a.active::after {
@@ -969,16 +957,13 @@ text-decoration: none!important;
     font-family: var(--font-sans);
     font-weight: bold;
     font-size: 1.5rem;
-	padding-left: 0px;
-	text-decoration: none;
-	/*letter-spacing: 3px;*/
-	font-weight: bolder;
-	cursor: default;
-	vertical-align: text-bottom;
-	white-space: nowrap;
-	text-align: center;
-	align-items: center;
-	justify-content: center;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bolder;
+    cursor: default;
+    vertical-align: text-bottom;
+    white-space: nowrap;
+    text-align: center;
 }
 
 ul {
@@ -1207,7 +1192,6 @@ table>tbody>tr:first-child>td, table>tfoot>tr:first-child>td, table>thead>tr:fir
     font-size: var(--font-z);
     color: var(--menu-hover-color);
     background-color: #008b89;
-    background-image: var(--bgqs-image);
     box-shadow: 0 0.3rem 0.8rem var(--input-boxcolor);
     transform: translate(1) translate(0,0);
     transition: transform 225ms,box-shadow 225ms;
@@ -1236,20 +1220,16 @@ table>tbody>tr:first-child>td, table>tfoot>tr:first-child>td, table>thead>tr:fir
 
 .cbi-tabcontainer>.cbi-value:nth-of-type(4n+2), .cbi-map>.cbi-section .cbi-value:nth-of-type(4n+2), fieldset>table>tbody>tr:nth-of-type(4n+2), table>tbody>tr:nth-of-type(4n+2), div>.table>.tr:nth-of-type(4n+2) {
 	background-color: rgba(var(--primary-rgbm), var(--primary-rgbs-ts));
-	background-image: var(--bgqs-image);
 }
 .cbi-tabcontainer>.cbi-value:nth-of-type(4n), .cbi-map>.cbi-section .cbi-value:nth-of-type(4n), fieldset>table>tbody>tr:nth-of-type(4n), table>tbody>tr:nth-of-type(4n), div>.table>.tr:nth-of-type(4n) {
 	background-color: rgba(var(--primary-rgbs), var(--primary-rgbs-ts));
-	background-image: var(--bgqs-image);
 }
 .cbi-tabcontainer>.cbi-value:nth-of-type(4n+2):hover, .cbi-map>.cbi-section .cbi-value:nth-of-type(4n+2):hover, fieldset>table>tbody>tr:nth-of-type(4n+2):hover, table>tbody>tr:nth-of-type(4n+2):hover, div>.table>.tr:nth-of-type(4n+2):hover {
     background-color: rgba(50,50,50,0.05);
-    background-image: var(--bgqs-image);
 	                  
 }
 .cbi-tabcontainer>.cbi-value:nth-of-type(4n):hover, .cbi-map>.cbi-section .cbi-value:nth-of-type(4n):hover, fieldset>table>tbody>tr:nth-of-type(4n):hover, table>tbody>tr:nth-of-type(4n):hover, div>.table>.tr:nth-of-type(4n):hover {
     background-color: rgba(50,50,50,0.05);
-    background-image: var(--bgqs-image);
 }
 
 .cbi-tabcontainer>.cbi-value:nth-of-type(2n+1):hover,.cbi-map>.cbi-section .cbi-value:nth-of-type(2n+1):hover,fieldset>table>tbody>tr:nth-of-type(2n+1):hover,table>tbody>tr:nth-of-type(2n+1):hover,div>.table>.tr:nth-of-type(2n+1):hover {
@@ -1512,7 +1492,7 @@ button:hover, .btn:hover, .cbi-button:hover ,.item:hover{
     display: inline-block;
     width: 100%;
     padding: 0 0.8rem;
-    line-height: 2.4rem;
+    line-height: 2.8rem;
 }
 
 
@@ -1525,7 +1505,8 @@ button:hover, .btn:hover, .cbi-button:hover ,.item:hover{
     margin-bottom:20px;
 }
 
-.cbi-filebrowser.open .upload {
+.cbi-filebrowser .upload,
+.cbi-filebrowser>.right>.upload {
     display: inline-flex;
 }
 .cbi-value.cbi-value-last {
@@ -1728,6 +1709,10 @@ button:hover, .btn:hover, .cbi-button:hover ,.item:hover{
     border: 1px solid rgba(var(--primary-rgbm), 1);
 }
 
+
+.cbi-dropdown {
+  padding: .2rem .2rem;
+}
 
 .cbi-dropdown[placeholder*="select"] {
 	max-width: 25rem;
@@ -1939,6 +1924,7 @@ select[multiple="multiple"] {
 
 select, input {
 	padding: 0 20px 0 10px;
+	line-height: 2rem;
         margin: 0.2rem 0.2rem 0.2rem 0;
 }
 
@@ -1959,7 +1945,6 @@ select, input {
 	transition: width .25s ease-in;
 	border-radius:  var(--radius2)!important;
 	background-color: rgba(var(--primary-rgbm),0.7);
-	background-image: var(--bgqs-image);
 }
 .cbi-progressbar::after {
 	font-size: var(--font-x);
@@ -1996,22 +1981,18 @@ select, input {
 	max-width: 800px;
 	min-height: 32px;
 	margin: 5em auto;
-	padding: 1em;
+	padding: 0.2rem;
 	border-radius:  var(--radius2)!important;
 	background-color: rgba(var(--primary-rgbbody), 1);
     box-shadow: 0 2px 10px 0px rgba(255, 255, 255, .16), 0 0 10px 0 rgba(255, 255, 255, .12);
 }
+
 #modal_overlay .cbi-section,
 .modal .cbi-section{
     overflow: visible;
 }
-/*
-.modal .right>.btn {
-	padding: 0 0.8rem
-}
-*/
 .modal .right>.primary {
-	padding: .3rem .6rem;
+    min-width: 8rem;
 }
 
 .modal [data-tab-active="true"] {
@@ -2035,6 +2016,12 @@ select, input {
 
 .modal > .button-row .btn{
   line-height: 1.8;
+}
+
+#modal_overlay .modal>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .modal > pre, .modal > textarea {
@@ -2160,8 +2147,8 @@ body.modal-overlay-active #modal_overlay {
 }
 .spinning {
     position: relative;
-    font-size: 1rem;
-    padding-left: 32px !important;
+    font-size: var(--font-z);
+    padding: 2rem 0rem 2rem 3rem !important;
 }
 .spinning::before {
     position: absolute;
@@ -2188,7 +2175,7 @@ body.modal-overlay-active #modal_overlay {
 }
 .right .cbi-button {
 	line-height: 1;
-	margin: 0;
+	margin: 0.2rem;
 }
 .right, .right::before {
     text-align: right !important;
@@ -2942,6 +2929,20 @@ body.lang_pl.node-main-login .cbi-value-title {
 	margin: 0;
 }
 
+.cbi-tab-disabled[data-errors]::after {
+  content: attr(data-errors);
+  background: #c43c35;
+  color: #fff;
+  height: 16px;
+  min-width: 16px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0 5px 0 0;
+  padding: 2px 2px 2px 2px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+}
 #cbi-firewall-redirect table *, #cbi-network-switch_vlan table *, #cbi-firewall-zone table * {
 	font-size: small;
 	white-space: nowrap;
@@ -3167,14 +3168,12 @@ background-color: rgba(255,255,255,0.12)!important;
    width: 15rem;
 }
 
-[data-page="admin-network-network "] .main #view td:nth-child(3),
+[data-page="admin-status-processes"]  #view td:nth-child(3)>span,
 .cbi-map>.cbi-section .cbi-value:nth-of-type(4) td:nth-child(2), .Interfaces > .main #view td:nth-child(3), .node-admin-network-network > .main #view td:nth-child(3), .Processes > .main #view td:nth-child(3), .node-admin-status-processes > .main #view td:nth-child(3), .node-admin-status-overview > .main #view td:nth-child(2) {
 	white-space: normal !important;
-}
-
-[data-page="admin-status-processes"]  #view td:nth-child(3)>span {
 	word-break: unset!important;
 }
+
 .node-admin-status-overview #view .cbi-section>div>div {
     justify-items: center !important
 }
@@ -3374,6 +3373,10 @@ pre.command-output {
     min-width: inherit;
     overflow-x: auto;
     overflow-y: hidden;
+}
+[data-page="admin-system-reboot"]  #maincontent>.container>#view,
+[data-page="admin-system-poweroffdevice"]  #maincontent .container  {
+  padding: 0 1rem 3rem 1rem;
 }
 .node-admin-network-diagnostics #view .table{
     margin-top: 2rem;
