@@ -2,14 +2,14 @@
 
 svn_export() {
 	# 参数1是分支名, 参数2是子目录, 参数3是目标目录, 参数4仓库地址
- 	echo -e "clone $4/$2 to $3"
+ 	echo -e "clone $4/$2 到 $3"
 	TMP_DIR="$(mktemp -d)" || exit 1
  	ORI_DIR="$PWD"
 	[ -d "$3" ] || mkdir -p "$3"
 	TGT_DIR="$(cd "$3"; pwd)"
 	git clone --depth 1 -b "$1" "$4" "$TMP_DIR" >/dev/null 2>&1 && \
 	cd "$TMP_DIR/$2" && rm -rf .git >/dev/null 2>&1 && \
-	cp -af . "$TGT_DIR/" && cd "$ORI_DIR"
+	cp -af 。 "$TGT_DIR/" && cd "$ORI_DIR"
 	rm -rf "$TMP_DIR"
 }
 # svn_export "master" "applications/luci-app-wechatpush" "feeds/luci/applications/luci-app-wechatpush" "https://github.com/immortalwrt/luci"
@@ -52,6 +52,10 @@ rm -rf luci-app-netdata/{.git,LICENSE,po/zh_Hant}
 
 git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --depth 1
 rm -rf luci-app-filemanager/.git
+
+# ngtcp2
+git clone https://github.com/sbwml/package_libs_ngtcp2 ngtcp2 --depth 1
+rm -rf ngtcp2/.git
 
 git clone https://github.com/sbwml/OpenAppFilter luci-app-oaf --depth 1
 sed -i '/#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0))/,/#endif/d' luci-app-oaf/oaf/src/af_log.c
