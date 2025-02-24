@@ -3,7 +3,7 @@ name: Create Empty Branch
 于:
   push:
     分支:
-      - main  # 触发工作流的分支，推送到 `main` 分支时触发工作流
+      - main  # 当推送到 main 分支时触发工作流
 
 jobs:
   create_empty_branch:
