@@ -129,5 +129,5 @@ rm -rf immortalwrt-packages
 
 # 输出目录列表并保存到 packages.txt
 # ls -d */ | xargs -n 1 basename | paste -sd ' ' - > packages.txt
-ls -d */ | xargs -n 1 basename > packages.txt
-
+# ls -d */ | xargs -n 1 basename > packages.txt
+ls -d */ | xargs -n 1 basename | grep -v -E '^(openwrt)$' > packages.txt 
