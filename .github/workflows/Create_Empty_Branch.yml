@@ -1,9 +1,7 @@
 name: Create Empty Branch
 
 on:
-  push:
-    branches:
-      - main  # 当推送到 main 分支时触发工作流
+  workflow_dispatch:
 
 jobs:
   create_empty_branch:
