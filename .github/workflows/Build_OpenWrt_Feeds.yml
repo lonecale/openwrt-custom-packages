@@ -2,13 +2,13 @@ name: Build OpenWrt Feeds
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - .github/**
-      - openwrt/**
-      - packages.txt
+  #push:
+    #branches:
+      #- main
+    #paths-ignore:
+      #- .github/**
+      #- openwrt/**
+      #- packages.txt
 
 jobs:
   build:
