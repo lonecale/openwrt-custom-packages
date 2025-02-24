@@ -73,8 +73,10 @@ jobs:
       - name: Fetch packages
         run: |
           feeds_list=$(curl -s "https://raw.githubusercontent.com/${{ github.repository }}/main/packages.txt")
+          echo "$feeds_list"
           packages_list=$(echo "$feeds_list" | tr '\n' ' ')
-          echo "packages_list=$feeds_list" >> $GITHUB_ENV
+          echo "$packages_list"
+          echo "packages_list=$packages_list" >> $GITHUB_ENV
 
       - name: Show build info
         run: |
