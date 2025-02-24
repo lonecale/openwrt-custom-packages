@@ -75,7 +75,7 @@ jobs:
         run: |
           git sparse-checkout init --cone
           # 初始化稀疏检出，包含仓库的所有文件夹
-          git sparse-checkout set /*
+          git sparse-checkout set '*'
           # 包括根目录下的所有文件夹
           git sparse-checkout set '!openwrt'
           # 排除 'openwrt' 目录
