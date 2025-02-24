@@ -1,8 +1,8 @@
 name: Create Empty Branch
 
-于:
+on:
   push:
-    分支:
+    branches:
       - main  # 当推送到 main 分支时触发工作流
 
 jobs:
