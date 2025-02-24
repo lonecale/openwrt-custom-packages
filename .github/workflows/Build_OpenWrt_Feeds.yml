@@ -80,18 +80,17 @@ jobs:
           echo "排除 openwrt 文件夹之前的仓库结构："
           git ls-tree --name-only HEAD
           
-          # 过滤出所有目录，并排除 openwrt 目录
+          # 过滤出所有目录 并排除 openwrt 目录
           directories=$(git ls-tree --name-only HEAD | grep '/$' | grep -v '^openwrt$')
           echo "将要被保留的目录："
           echo "$directories"
           
           # 检查目录格式是否正确
-          # 注意：目录路径应该是以斜杠（`/`）结尾
           directories=$(echo "$directories" | tr '\n' ' ')
           echo "将要传递给 git sparse-checkout set 的目录："
           echo "$directories"
       
-          # 执行排除操作，排除 openwrt 目录
+          # 执行排除操作 排除 openwrt 目录
           git sparse-checkout set $directories
       
           # 打印执行 sparse-checkout 后的目录结构，确保排除生效
