@@ -1,0 +1,44 @@
+name: Create Empty Branch
+
+于:
+  push:
+    分支:
+      - main  # 触发工作流的分支，推送到 `main` 分支时触发工作流
+
+jobs:
+  create_empty_branch:
+    name: Create Empty Branch
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出 main 分支的代码
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      # 设置 Git 配置
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      # 创建一个没有历史记录的新分支
+      - name: Create empty branch opkg-repo
+        run: |
+          # 创建一个没有历史记录的新分支
+          git checkout --orphan opkg-repo
+          
+          # 删除所有文件，使分支为空
+          git rm -rf .
+
+          # 提交空分支的变更
+          git commit --allow-empty -m "Initial commit for opkg-repo branch"
+
+          # 推送到远程仓库的 opkg-repo 分支
+          git push origin opkg-repo
+
+      # 可选：验证创建的分支
+      - name: Verify new branch
+        run: |
+          git branch -a  # 列出所有分支，确保新分支已创建
