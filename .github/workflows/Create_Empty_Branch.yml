@@ -9,13 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出 main 分支的代码
-      - name: Checkout main branch
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      # 设置 Git 配置
+      # 初始化裸仓库并跳过默认分支
       - name: Set up Git
         run: |
           git config --global user.name "GitHub Actions"
@@ -24,6 +18,11 @@ jobs:
       # 创建一个没有历史记录的新分支
       - name: Create empty branch GCC14
         run: |
+          # 初始化裸仓库并跳过主分支
+          git init --bare repo.git
+          git clone repo.git repo-dir
+          cd repo-dir
+
           # 创建一个没有历史记录的新分支
           git checkout --orphan GCC14
           
@@ -33,7 +32,8 @@ jobs:
           # 提交空分支的变更
           git commit --allow-empty -m "Initial commit for GCC14 branch"
 
-          # 为了避免与默认分支（如 main）比较，推送 GCC14 分支并强制更新
+          # 推送到远程仓库的 GCC14 分支
+          git remote add origin https://github.com/${{ github.repository }}.git
           git push origin GCC14 --force
 
       # 可选：验证创建的分支
