@@ -22,19 +22,19 @@ jobs:
           git config --global user.email "actions@github.com"
 
       # 创建一个没有历史记录的新分支
-      - name: Create empty branch opkg-repo
+      - name: Create empty branch GCC14
         run: |
           # 创建一个没有历史记录的新分支
-          git checkout --orphan opkg-repo
+          git checkout --orphan GCC14
           
           # 删除所有文件，使分支为空
           git rm -rf .
 
           # 提交空分支的变更
-          git commit --allow-empty -m "Initial commit for opkg-repo branch"
+          git commit --allow-empty -m "Initial commit for GCC14 branch"
 
-          # 推送到远程仓库的 opkg-repo 分支
-          git push origin opkg-repo
+          # 推送到远程仓库的 GCC14 分支
+          git push origin GCC14
 
       # 可选：验证创建的分支
       - name: Verify new branch
