@@ -20,5 +20,4 @@ luci-theme-kucat
 lucky
 netdata-ssl
 ngtcp2
-openwrt
 smartdns
