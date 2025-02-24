@@ -71,10 +71,22 @@ jobs:
           fetch-depth: 1
           ref: main
 
-      - name: Exclude directory using sparse-checkout  # 排除指定目录
+      - name: Exclude openwrt directory using sparse-checkout
         run: |
           git sparse-checkout init --cone
-          git sparse-checkout set $(git ls-tree --name-only HEAD | grep -v '^openwrt')
+          
+          echo "排除 openwrt 文件夹之前的仓库结构："
+          git ls-tree --name-only HEAD
+          
+          # 过滤出所有目录，并排除 openwrt 目录
+          directories=$(git ls-tree --name-only HEAD | grep '/$' | grep -v '^openwrt$')
+          echo "将要被保留的目录："
+          echo "$directories"
+          
+          git sparse-checkout set $directories
+      
+          echo "排除 openwrt 文件夹之后的仓库结构："
+          git ls-tree --name-only HEAD
 
       - name: Fetch packages
         run: |
