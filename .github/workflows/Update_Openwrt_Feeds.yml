@@ -15,7 +15,6 @@ jobs:
         with:
           fetch-depth: 1
           ref: main
-          # token: ${{ secrets.OPENWRT_WORKFLOW_TOKEN }}
 
       - name: Update Feeds
         run: |
