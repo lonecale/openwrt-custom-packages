@@ -2,13 +2,12 @@ name: Build OpenWrt Feeds
 
 on:
   workflow_dispatch:
-  #push:
-    #branches:
-      #- main
-    #paths-ignore:
-      #- .github/**
-      #- openwrt/**
-      #- packages.txt
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .github/**
+      - packages.txt
 
 jobs:
   build:
@@ -71,32 +70,6 @@ jobs:
           fetch-depth: 1
           ref: main
 
-      - name: Exclude openwrt directory using sparse-checkout
-        run: |
-          # 初始化 sparse-checkout
-          git sparse-checkout init --cone
-          
-          # 打印当前仓库的目录结构，查看哪些文件和目录会被处理
-          echo "排除 openwrt 文件夹之前的仓库结构："
-          git ls-tree --name-only HEAD
-          
-          # 过滤出所有目录 并排除 openwrt 目录
-          directories=$(git ls-tree --name-only HEAD | grep '/$' | grep -v '^openwrt$')
-          echo "将要被保留的目录："
-          echo "$directories"
-          
-          # 检查目录格式是否正确
-          directories=$(echo "$directories" | tr '\n' ' ')
-          echo "将要传递给 git sparse-checkout set 的目录："
-          echo "$directories"
-      
-          # 执行排除操作 排除 openwrt 目录
-          git sparse-checkout set $directories
-      
-          # 打印执行 sparse-checkout 后的目录结构，确保排除生效
-          echo "排除 openwrt 文件夹之后的仓库结构："
-          git ls-tree --name-only HEAD
-
       - name: Fetch packages
         run: |
           feeds_list=$(curl -s "https://raw.githubusercontent.com/${{ github.repository }}/main/packages.txt")
@@ -123,16 +96,12 @@ jobs:
           NO_REFRESH_CHECK: true
           NO_SHFMT_CHECK: true
           IGNORE_ERRORS: true
-
-      - name: Restore full repository (including openwrt folder)
-        run: |
-          git sparse-checkout disable
           
       - name: Upload packages
         run: |
-          mkdir -p /tmp/openwrt_lite/${{ matrix.arch }}/
-          mv bin/packages/${{ matrix.arch }}/packages_lite/* /tmp/openwrt_lite/${{ matrix.arch }}
-          tar -cJvf /tmp/openwrt_lite/packages-extd-${{ matrix.arch }}.tar.xz -C /tmp/openwrt_lite ${{ matrix.arch }}
+          mkdir -p /tmp/openwrt_packages/${{ matrix.arch }}/
+          mv bin/packages/${{ matrix.arch }}/packages_lite/* /tmp/openwrt_packages/${{ matrix.arch }}
+          tar -cJvf /tmp/openwrt_packages/packages-ipk-${{ matrix.arch }}.tar.xz -C /tmp/openwrt_packages ${{ matrix.arch }}
 
       - name: Create release
         uses: ncipollo/release-action@v1.14.0
@@ -142,7 +111,7 @@ jobs:
           tag: ${{ matrix.tag }}
           replacesArtifacts: true
           token: ${{ secrets.OPENWRT_WORKFLOW_TOKEN }}
-          artifacts: /tmp/openwrt_lite/packages-extd-${{ matrix.arch }}.tar.xz
+          artifacts: /tmp/openwrt_packages/packages-ipk-${{ matrix.arch }}.tar.xz
 
       - name: Push Built Packages to opkg-repo
         run: |
@@ -150,19 +119,19 @@ jobs:
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
 
-          git clone --single-branch --branch opkg-repo https://github.com/${{ github.repository }}.git opkg-repo
-          cd opkg-repo
-          mkdir -p openwrt_lite/23.05
+          git fetch origin opkg-repo
+          git checkout opkg-repo
+          mkdir -p openwrt_packages/23.05
 
-          git rm --cached --ignore-unmatch openwrt_lite/23.05/**/*.ipk || true
+          git rm --cached --ignore-unmatch openwrt_packages/23.05/**/*.ipk || true
 
           # Check if there are new packages and only add them if changed
-          mv /tmp/openwrt_lite/${{ matrix.arch }}/packages_lite/* openwrt_lite/23.05/
-          git add openwrt_lite/23.05/*
+          mv /tmp/openwrt_packages/${{ matrix.arch }}/packages_lite/* openwrt_packages/23.05/
+          git add openwrt_packages/23.05/*
 
           # Commit only if there are new changes
-          if ! git diff --quiet; then
-            git commit -sm "[${{ env.latest_release }}] Update packages openwrt_lite-23.05"
+          if ! git diff --quiet || ! git status --porcelain | grep -q .; then
+            git commit -sm "$(TZ='Asia/Hong_Kong' date +'%Y-%m-%d %H:%M:%S') Build OpenWrt Feeds"
             git push --force
           else
             echo "No changes detected, skipping commit and push."
