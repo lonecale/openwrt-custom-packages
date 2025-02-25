@@ -1,0 +1,42 @@
+name: Create Empty Branch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_empty_branch:
+    name: Create Empty Branch
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出 main 分支的代码
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      # 设置 Git 配置
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      # 创建一个没有历史记录的新分支
+      - name: Create empty branch gcc14
+        run: |
+          # 创建一个没有历史记录的新分支
+          git checkout --orphan gcc14
+          
+          # 删除所有文件，使分支为空
+          git rm -rf .
+
+          # 提交空分支的变更
+          git commit --allow-empty -m "Initial commit for gcc14 branch"
+
+          # 为了避免与默认分支（如 main）比较，推送 gcc14 分支并强制更新
+          git push origin gcc14 --force
+
+      # 可选：验证创建的分支
+      - name: Verify new branch
+        run: |
+          git branch -a  # 列出所有分支，确保新分支已创建
