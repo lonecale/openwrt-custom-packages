@@ -18,7 +18,6 @@ svn_export() {
 shopt -s extglob
 mkdir -p /tmp/extd/
 mv */ /tmp/extd/
-mv /tmp/extd/openwrt ./
 
 # download
 git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
@@ -129,5 +128,4 @@ rm -rf immortalwrt-packages
 
 # 输出目录列表并保存到 packages.txt
 # ls -d */ | xargs -n 1 basename | paste -sd ' ' - > packages.txt
-# ls -d */ | xargs -n 1 basename > packages.txt
-ls -d */ | xargs -n 1 basename | grep -v -E '^(openwrt)$' > packages.txt 
+ls -d */ | xargs -n 1 basename > packages.txt
