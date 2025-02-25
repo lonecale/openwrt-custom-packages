@@ -6,7 +6,8 @@ on:
   workflow_dispatch:  # 允许手动触发工作流
 
 jobs:
-  cleanup:
+  sync:
+    name: Sync OpenWrt fix
     runs-on: ubuntu-24.04
     env:
       TZ: 'Asia/Shanghai'
@@ -17,12 +18,10 @@ jobs:
 
     steps:
     # 克隆仓库并处理
-    - name: Checkout repository
-      uses: actions/checkout@main
+    - uses: actions/checkout@main
       with:
           fetch-depth: 1
           ref: gcc14
-      # 使用actions/checkout来获取工作目录
 
     # 设置 GitHub Token
     - name: Set up GitHub token
