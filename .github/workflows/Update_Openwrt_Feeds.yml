@@ -27,7 +27,7 @@ jobs:
           git config --global user.email 'actions@github.com'
           git add .
           if ! git diff-index --quiet HEAD --; then
-            git commit -sm "Sync upstream $(TZ='Asia/Hong_Kong' date +'%Y-%m-%d %H:%M:%S')"
+            git commit -sm "Sync upstream up to $(TZ='Asia/Hong_Kong' date +'%Y-%m-%d %H:%M:%S')"
             git push
           else
             echo "No changes to commit, skipping push."
