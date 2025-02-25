@@ -131,7 +131,7 @@ jobs:
 
           # Commit only if there are new changes
           if ! git diff --quiet || ! git status --porcelain | grep -q .; then
-            git commit -sm "$(TZ='Asia/Hong_Kong' date +'%Y-%m-%d %H:%M:%S') Build OpenWrt Feeds"
+            git commit -sm "Build OpenWrt Feeds up to $(TZ='Asia/Hong_Kong' date +'%Y-%m-%d %H:%M:%S')"
             git push --force
           else
             echo "No changes detected, skipping commit and push."
