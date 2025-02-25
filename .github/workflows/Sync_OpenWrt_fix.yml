@@ -276,7 +276,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "Auto Update up to $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
           git push        
           echo -e "\033[32m提交更改并推送到仓库。\033[0m"
         else
