@@ -19,6 +19,9 @@ jobs:
     # 克隆仓库并处理
     - name: Checkout repository
       uses: actions/checkout@main
+      with:
+          fetch-depth: 1
+          ref: gcc14
       # 使用actions/checkout来获取工作目录
 
     # 设置 GitHub Token
@@ -275,7 +278,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -A
           git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
-          git push origin main          
+          git push        
           echo -e "\033[32m提交更改并推送到仓库。\033[0m"
         else
           echo -e "\033[33m没有更改需要提交。\033[0m"
