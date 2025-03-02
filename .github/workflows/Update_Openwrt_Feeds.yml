@@ -38,7 +38,7 @@ jobs:
         id: push_openwrt_ipk_build
         uses: peter-evans/repository-dispatch@v3
         with:
-          #token: ${{ secrets.OPENWRT_WORKFLOW_TOKEN }}
+          token: ${{ secrets.OPENWRT_WORKFLOW_TOKEN }}
           repository: lonecale/openwrt-custom-packages
           event-type: Build_OpenWrt_Feeds
 
