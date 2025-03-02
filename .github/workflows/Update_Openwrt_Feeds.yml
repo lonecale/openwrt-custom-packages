@@ -34,7 +34,7 @@ jobs:
           fi
 
       - name: Push Build
-        # if: env.changes_committed != 'n'
+        #if: env.changes_committed != 'n'
         id: push_openwrt_ipk_build
         uses: peter-evans/repository-dispatch@v3
         with:
