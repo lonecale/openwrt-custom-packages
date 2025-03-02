@@ -8,6 +8,8 @@ on:
     paths-ignore:
       - .github/**
       - packages.txt
+  repository_dispatch:
+    types: [Build_OpenWrt_Feeds]
 
 jobs:
   build:
