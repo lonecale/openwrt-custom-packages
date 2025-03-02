@@ -33,14 +33,14 @@ jobs:
             echo "changes_committed=n" >> $GITHUB_ENV
           fi
 
-      #- name: Push Build
-        #if: env.changes_committed != 'n'
-        #id: push_openwrt_build
-        #uses: peter-evans/repository-dispatch@v3
-        #with:
+      - name: Push Build
+        # if: env.changes_committed != 'n'
+        id: push_openwrt_ipk_build
+        uses: peter-evans/repository-dispatch@v3
+        with:
           #token: ${{ secrets.OPENWRT_WORKFLOW_TOKEN }}
-          #repository: lonecale/openwrt-custom-packages
-          #event-type: build
+          repository: lonecale/openwrt-custom-packages
+          event-type: Build OpenWrt Feeds
 
       - name: Cleanup Workflow
         uses: Mattraks/delete-workflow-runs@main
