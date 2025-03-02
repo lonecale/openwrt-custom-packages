@@ -47,4 +47,4 @@ jobs:
         with:
           retain_days: 0
           keep_minimum_runs: 2
-          delete_workflow_pattern : Update OpenWrt Feeds
+          delete_workflow_pattern : Build_OpenWrt_Feeds
