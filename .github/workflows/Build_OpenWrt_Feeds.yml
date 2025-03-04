@@ -129,7 +129,10 @@ jobs:
           # git rm --cached --ignore-unmatch openwrt_packages/23.05/**/*.ipk || true
           git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch openwrt_packages/23.05/**/*.ipk' --prune-empty --tag-name-filter cat HEAD
 
-          mv /tmp/openwrt_packages/* openwrt_packages/23.05/
+          rm -rf openwrt_packages/23.05
+          mkdir -p openwrt_packages/23.05
+          cp -r /tmp/openwrt_packages/* openwrt_packages/23.05/
+
           git add openwrt_packages/23.05/*
 
           if [[ -n $(git status -s) ]]; then
