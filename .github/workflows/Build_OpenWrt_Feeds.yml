@@ -131,7 +131,7 @@ jobs:
 
           rm -rf openwrt_packages/23.05
           mkdir -p openwrt_packages/23.05
-          cp -r /tmp/openwrt_packages/* openwrt_packages/23.05/
+          mv /tmp/openwrt_packages/* openwrt_packages/23.05/
 
           git add openwrt_packages/23.05/*
 
