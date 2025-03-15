@@ -10,7 +10,6 @@ luci-app-lucky
 luci-app-netdata
 luci-app-netspeedtest
 luci-app-netwizard
-luci-app-oaf
 luci-app-parentcontrol
 luci-app-partexp
 luci-app-smartdns
