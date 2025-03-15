@@ -13,10 +13,10 @@ svn_export() {
 	rm -rf "$TMP_DIR"
 }
 # svn_export "master" "applications/luci-app-wechatpush" "feeds/luci/applications/luci-app-wechatpush" "https://github.com/immortalwrt/luci"
-rm -rf luci-app-oaf
 # backup feeds
 shopt -s extglob
 mkdir -p /tmp/extd/
+rm -rf luci-app-oaf/
 mv */ /tmp/extd/
 
 # download
