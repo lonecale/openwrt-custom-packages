@@ -13,7 +13,7 @@ svn_export() {
 	rm -rf "$TMP_DIR"
 }
 # svn_export "master" "applications/luci-app-wechatpush" "feeds/luci/applications/luci-app-wechatpush" "https://github.com/immortalwrt/luci"
-
+rm -rf luci-app-oaf
 # backup feeds
 shopt -s extglob
 mkdir -p /tmp/extd/
@@ -61,7 +61,7 @@ rm -rf ngtcp2/.git
 # rm -rf luci-app-oaf/{.git,LICENSE}
 
 git clone https://github.com/destan19/OpenAppFilter luci-app-oaf -b master --depth 1
-rm -rf OpenAppFilter/{.git,LICENSE}
+rm -rf luci-app-oaf/{.git,LICENSE}
 
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
 git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
