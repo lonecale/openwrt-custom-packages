@@ -16,7 +16,6 @@ svn_export() {
 # backup feeds
 shopt -s extglob
 mkdir -p /tmp/extd/
-rm -rf luci-app-oaf/
 mv */ /tmp/extd/
 
 # download
@@ -60,8 +59,8 @@ rm -rf ngtcp2/.git
 # sed -i '/#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0))/,/#endif/d' luci-app-oaf/oaf/src/af_log.c
 # rm -rf luci-app-oaf/{.git,LICENSE}
 
-# git clone https://github.com/destan19/OpenAppFilter luci-app-oaf -b master --depth 1
-# rm -rf luci-app-oaf/{.git,LICENSE}
+git clone https://github.com/destan19/OpenAppFilter luci-app-oaf -b master --depth 1
+rm -rf luci-app-oaf/{.git,LICENSE}
 
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
 git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
