@@ -4,10 +4,10 @@ Depends: libc, ca-bundle
 License: GPL-3.0-only
 Section: net
 Architecture: x86_64
-Installed-Size: 11124235
+Installed-Size: 11124168
 Filename: adguardhome_0.107.57-1_x86_64.ipk
-Size: 11101266
-SHA256sum: 5392a63edb9fd7d38fc3ae50e7967e0b89ad96861f20254c27b0641f6f2b5891
+Size: 11101320
+SHA256sum: b83fefa322791daa4ab74a4bad3cc184f92678ff4d7e55b4fd737d85f8ec8409
 Description:  Free and open source, powerful network-wide ads and trackers blocking DNS server.
 
 Package: appfilter
@@ -17,8 +17,8 @@ Section: TT Apps
 Architecture: x86_64
 Installed-Size: 30503
 Filename: appfilter_6.1.1-1_x86_64.ipk
-Size: 31207
-SHA256sum: e16a9907be7877bd1a9c9e454fe811a801c8074dd59f6b2b9db1e62c9f2d356f
+Size: 31206
+SHA256sum: 772b9794565b7610e2cf4bf71c6821139b956535b7d0dca244e10be3ce50f63a
 Description:  openappfilter app
 
 Package: ddns-go
@@ -27,10 +27,10 @@ Depends: libc, ca-bundle
 License: AGPL-3.0-only
 Section: net
 Architecture: x86_64
-Installed-Size: 4438156
+Installed-Size: 4438104
 Filename: ddns-go_6.8.1-1_x86_64.ipk
-Size: 4429644
-SHA256sum: a6dc698b670175c1deb113ffb512162d097d6701eef6ef8e137e08d017b631ab
+Size: 4429656
+SHA256sum: 3a8825bef1850355604b3a15398f265f31e18cd3568e793421b84a1cda9559cc
 Description:  ddns-go is a automatically obtain your public IPv4 or IPv6 address and resolve it to the corresponding domain name service,
  support Alidns Dnspod Cloudflare Hicloud Callback Baiducloud porkbun GoDaddy Google Domains.
 
@@ -39,10 +39,10 @@ Version: 0.0.0.2024101306-1
 Depends: libc, libstdcpp6
 Section: net
 Architecture: x86_64
-Installed-Size: 3256731
+Installed-Size: 3256730
 Filename: homebox_0.0.0.2024101306-1_x86_64.ipk
-Size: 3251475
-SHA256sum: 37582aeb7bf648c5570d29f2077f90064e6952ff82a5a18f326467e20ef0506b
+Size: 3251424
+SHA256sum: 6769f2ceb6b6cf3235c2f60488b5685acf5868a47a42975f8fadffbddbf0c43a
 Description:  A Toolbox for Home Local Networks Speed Test
 
 Package: libngtcp2
@@ -53,30 +53,30 @@ Section: libs
 Architecture: x86_64
 Installed-Size: 340361
 Filename: libngtcp2_1.11.0-1_x86_64.ipk
-Size: 341243
-SHA256sum: e51ad45cb4e3114e8df9acbd74bfddd93f07252ad522d74c46f1a75120e6116f
+Size: 341234
+SHA256sum: 53a14dbed6851f44d75b908e7f78d4e2cee4d8338ee1288d03e85ee96d8be0b0
 Description:  ngtcp2 project is an effort to implement QUIC protocol which is now being discussed in IETF QUICWG for its standardization.
 
 Package: luci-app-adguardhome
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, wget-ssl, xz-utils, xz, luci-lua-runtime
 Section: luci
 Architecture: all
-Installed-Size: 91394
-Filename: luci-app-adguardhome_git-25.074.60883-932270d_all.ipk
-Size: 92556
-SHA256sum: cb588bd27fdbf4b172bf447c1d99dfb674ee5b69b518e8756d682f75773f6b1b
+Installed-Size: 91395
+Filename: luci-app-adguardhome_git-25.075.11170-966e1d5_all.ipk
+Size: 92554
+SHA256sum: b97b53e3f10c1501b10166f6efd033f8d4d017a038ab2d3af05394e6b8940e02
 Description:  LuCI support for AdGuardHome
 
 Package: luci-app-advancedplus
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-compat, curl, luci-lua-runtime
 Section: luci
 Architecture: all
 Installed-Size: 14509
-Filename: luci-app-advancedplus_git-25.074.60883-932270d_all.ipk
-Size: 15418
-SHA256sum: b097287c0a088c9669e341102e23840d147112e924ac9725c2b0ca26f6b25fd2
+Filename: luci-app-advancedplus_git-25.075.11170-966e1d5_all.ipk
+Size: 15416
+SHA256sum: cfc0bdd8159d1ce0c287f95e28f8ceec43ce3d5566c35c49fb3949098d35ce1a
 Description:  LuCI support for Kucat theme setting by sirpdboy
 
 Package: luci-app-autotimeset
@@ -86,8 +86,8 @@ Section: luci
 Architecture: all
 Installed-Size: 5986
 Filename: luci-app-autotimeset_2.2.0_all.ipk
-Size: 6843
-SHA256sum: 0993658d3f21c65a7dc450e675745f62bcb1a7f094135c7f070de4aeecd2addc
+Size: 6848
+SHA256sum: a02c5a87dddce950a1dcbc417bf6df958cbb9f07fbc9c82f428614b998d0ca9a
 Description:  LuCI support for Scheduled Time setting
 
 Package: luci-app-chatgpt-web
@@ -95,10 +95,10 @@ Version: 1.1.4
 Depends: libc, luci-lua-runtime
 Section: luci
 Architecture: all
-Installed-Size: 392995
+Installed-Size: 392989
 Filename: luci-app-chatgpt-web_1.1.4_all.ipk
-Size: 393922
-SHA256sum: 4a8b6f56ab91d442b7b9c400fc71e6bd5ad1a69ab9eda971f3bf6335fc3c311c
+Size: 393880
+SHA256sum: 447c56ad6ae6821cde72aa0b859ab027ded9c64d73ad983a1be38af0fb15aed0
 Description:  LuCI Support for chatgpt-web Client
 
 Package: luci-app-ddns-go
@@ -108,8 +108,8 @@ Section: luci
 Architecture: all
 Installed-Size: 5554
 Filename: luci-app-ddns-go_1.4.5_all.ipk
-Size: 6441
-SHA256sum: 30415cecc41a8751d9355f46d87edf1d00a713727593a5a664bbcd865f3b3d7b
+Size: 6438
+SHA256sum: b63c710baf22d1fe46cd5f245697be4c9cfcb3124451e6566d34ea5d1f536bb9
 Description:  LuCI Support for Dynamic ddns-go Client
 
 Package: luci-app-eqosplus
@@ -120,8 +120,8 @@ Section: luci
 Architecture: all
 Installed-Size: 6267
 Filename: luci-app-eqosplus_1.2.5_all.ipk
-Size: 7254
-SHA256sum: 14baa44c71c276642b418b78bf8e4cbc100f39cc2ec008f74136146bebc974f5
+Size: 7255
+SHA256sum: 117d59692b4f831bc1c096c1433133f0e884d8fe009fc0f66b9784f8b9ada148
 Description:  LuCI support for Easy eqosplus(Support speed limit based on IP address).
 
 Package: luci-app-filemanager
@@ -132,8 +132,8 @@ Section: luci
 Architecture: all
 Installed-Size: 20279
 Filename: luci-app-filemanager_1.0.1_all.ipk
-Size: 21078
-SHA256sum: 1d252312d1995efc22b95c464c67480a452245f56e5c82ba7602f6426fd5b6c4
+Size: 21077
+SHA256sum: f589e4ad6432361a1572b75e6bee4c12300413806c655812b2f528292d9233b9
 Description:  LuCI File Manager module
 
 Package: luci-app-lucky
@@ -141,22 +141,22 @@ Version: 1.2.0
 Depends: libc, lucky, luci-lua-runtime
 Section: luci
 Architecture: all
-Installed-Size: 4925
+Installed-Size: 4924
 Filename: luci-app-lucky_1.2.0_all.ipk
-Size: 5794
-SHA256sum: 04cc3f7faf4a9a0f4c97999baa7b417293698587dc9abfd78444757589e6dedb
+Size: 5800
+SHA256sum: 9e0a129cc6272fc371b303a4b84ea04168d20313d85b484a46b8619987a5a520
 Description:  LuCI Support for Dynamic lucky Client
 
 Package: luci-app-netdata
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, netdata-ssl, openssl-util
 License: GPL-3.0
 Section: luci
 Architecture: all
-Installed-Size: 191540
-Filename: luci-app-netdata_git-25.074.60883-932270d_all.ipk
-Size: 192527
-SHA256sum: b302cf1a1c8b3c9194cf81cea0e1a5e5d9242c8eeba9e48efa89a32b4fc647dc
+Installed-Size: 191539
+Filename: luci-app-netdata_git-25.075.11170-966e1d5_all.ipk
+Size: 192524
+SHA256sum: 0c9d839d52177c95c0c44a0fb3a028baee10e7119f6cc3d639dd344ed23c414b
 Description:  Real-time performance monitoring
 
 Package: luci-app-netspeedtest
@@ -164,10 +164,10 @@ Version: 2.3.1
 Depends: libc, python3, iperf3-ssl, homebox, luci-lua-runtime
 Section: luci
 Architecture: all
-Installed-Size: 26451
+Installed-Size: 26453
 Filename: luci-app-netspeedtest_2.3.1_all.ipk
-Size: 27301
-SHA256sum: 736fbfffd342101640b9d3441fefea3758ee9f9b1cb14a54105a5e40127f3f6c
+Size: 27299
+SHA256sum: b804f4ad5981759dc3ef65923d09eef2e8d7e33ef6a9a599862bc925e0796041
 Description:  LuCI Support for netspeedtest
 
 Package: luci-app-netwizard
@@ -179,7 +179,7 @@ Architecture: all
 Installed-Size: 6511
 Filename: luci-app-netwizard_1.8.8_all.ipk
 Size: 7422
-SHA256sum: e8862301ee5cbee620b0769bbe0dbcc792686f3018738950bfcaaedce393a16f
+SHA256sum: d3ceb4796d07b6a601d658d6b2c4c2b8b33bfa88bd5e1c4fd99f878456438e70
 Description:  LuCI Support for Wizard
 
 Package: luci-app-oaf
@@ -187,10 +187,10 @@ Version: 6.1.1
 Depends: libc, appfilter, kmod-oaf, luci-compat, luci-lua-runtime
 Section: luci
 Architecture: all
-Installed-Size: 2471641
+Installed-Size: 2471643
 Filename: luci-app-oaf_6.1.1_all.ipk
-Size: 2472852
-SHA256sum: 0dd4a04ece77478ba250e42baa7acc3d82a705606e091b6430961601e25b3bf6
+Size: 2472845
+SHA256sum: 9951e691fad713ced3537e9079f7f7891b19f43fdb904562baa7d37b747e6c24
 Description:  Open App Filter Module
 
 Package: luci-app-parentcontrol
@@ -201,8 +201,8 @@ Section: luci
 Architecture: all
 Installed-Size: 5644
 Filename: luci-app-parentcontrol_1.7.1_all.ipk
-Size: 6535
-SHA256sum: a5ab505800c5ab5b348df8dfc7ad87e449583b82a5f65e19ec0954e4333a0b52
+Size: 6533
+SHA256sum: 982c0cd5bb674040bf64cdf7729c17555f69da104a2a1a49a904e635e651c1d8
 Description:  LuCI support for Parent Control
 
 Package: luci-app-partexp
@@ -213,8 +213,8 @@ Section: luci
 Architecture: all
 Installed-Size: 7440
 Filename: luci-app-partexp_1.1.2_all.ipk
-Size: 8313
-SHA256sum: ba1ee0e151fa8e7eebb240d9c55f95bc671d730c7257beb45b984f6ec440c378
+Size: 8306
+SHA256sum: 16839b0a43af8d5d521ac34b03ade1897c1832899cbe6e2115e25c37fd94e42b
 Description:  LuCI Support for Automatic Partition Mount
 
 Package: luci-app-smartdns
@@ -225,19 +225,19 @@ Section: luci
 Architecture: all
 Installed-Size: 9693
 Filename: luci-app-smartdns_1.2025.46_all.ipk
-Size: 10538
-SHA256sum: 376e37ca05f9659529bea9e7efd8ae6fc37f1b5644920b10b9e330855e92cc94
+Size: 10535
+SHA256sum: 76bca7a5e2ee80f768627b6c585db57076f61b9a685d7af5f6b0b57f6adc2f5f
 Description:  Provides Luci for smartdns
 
 Package: luci-app-syscontrol
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-base
 Section: luci
 Architecture: all
 Installed-Size: 6258
-Filename: luci-app-syscontrol_git-25.074.60883-932270d_all.ipk
-Size: 7123
-SHA256sum: b3730d2c260c3e73935bec21e8d461507489a2f3a85d9497b3e68fbafa529125
+Filename: luci-app-syscontrol_git-25.075.11170-966e1d5_all.ipk
+Size: 7122
+SHA256sum: 7ad3417b34efbb1e637d9dc79510fd6ae8ae29433c250f67d3d833bd38b253d8
 Description:  LuCI for System Control
 
 Package: luci-app-wechatpush
@@ -245,204 +245,204 @@ Version: 3.6.4
 Depends: libc, iputils-arping, curl, jq, bash
 Section: luci
 Architecture: all
-Installed-Size: 77963
+Installed-Size: 77965
 Filename: luci-app-wechatpush_3.6.4_all.ipk
-Size: 78972
-SHA256sum: 2ccc7b77aeaa81422c69169d62d1719339fb14ff1129514530ebc7e1aa721d7e
+Size: 78976
+SHA256sum: 6f1bd6eadf0dd3bd60c8ebe95dea76ed9cf10d3c4bb8f28cda778157c98a3786
 Description:  LuCI support for wechatpush
 
 Package: luci-i18n-adguardhome-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-adguardhome
 Section: luci
 Architecture: all
 Installed-Size: 2626
-Filename: luci-i18n-adguardhome-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 3388
-SHA256sum: 6ebd7ebf54acffc91328e5c4326d1ff2dfaae635c5eb738deddf1226bca01eec
+Filename: luci-i18n-adguardhome-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 3390
+SHA256sum: 1a2bdb65962e40c8f8885e56c6f6c1a9c40defbd96105ce9b6d258bc9a2f0989
 Description:  Translation for luci-app-adguardhome - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-advancedplus-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-advancedplus
 Section: luci
 Architecture: all
 Installed-Size: 4269
-Filename: luci-i18n-advancedplus-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 4997
-SHA256sum: c897fd91c72f8e081ad3cf70fda87fe82b689ceb28fe28844b8b7fe8ee0f4e79
+Filename: luci-i18n-advancedplus-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 5000
+SHA256sum: 717e5bcc7793808a369185769105950a3a6aefe7974e6db17ca0b2a2dad8bb08
 Description:  Translation for luci-app-advancedplus - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-autotimeset-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-autotimeset
 Section: luci
 Architecture: all
-Installed-Size: 1356
-Filename: luci-i18n-autotimeset-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 2129
-SHA256sum: c3ed11eb50cc38df4dfa6c6902061d6fa32cd20250c213b405150a3cd2d69539
+Installed-Size: 1355
+Filename: luci-i18n-autotimeset-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 2124
+SHA256sum: 36b2afa934a2b8b144f075cbc7c9582da69718efbe50f8e572f557631d874ea8
 Description:  Translation for luci-app-autotimeset - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-chatgpt-web-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-chatgpt-web
 Section: luci
 Architecture: all
-Installed-Size: 1047
-Filename: luci-i18n-chatgpt-web-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 1808
-SHA256sum: 1530157f469ae770fd5cf38da21d545226b18a727ee578530d669d4a8c509c87
+Installed-Size: 1046
+Filename: luci-i18n-chatgpt-web-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 1804
+SHA256sum: 193de57a90b575280de464d76c370266b957b511e801ccd6097fa270f949819b
 Description:  Translation for luci-app-chatgpt-web - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-ddns-go-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-ddns-go
 Section: luci
 Architecture: all
 Installed-Size: 933
-Filename: luci-i18n-ddns-go-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 1692
-SHA256sum: 4d4ad31dd9a8a823255e9078f68880c4973a5235cab3595629c052ed3aaa0c57
+Filename: luci-i18n-ddns-go-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 1702
+SHA256sum: 76fe9a422d20756d9637cc2167fbefb97627aa78b4bf4ba84ffa95aeff72043b
 Description:  Translation for luci-app-ddns-go - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-eqosplus-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-eqosplus
 License: Apache-2.0
 Section: luci
 Architecture: all
 Installed-Size: 952
-Filename: luci-i18n-eqosplus-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 1765
-SHA256sum: eee5b0cd980c4d93332ba6abfd3de2b80a8788120dc873d56d2362395e2ac962
+Filename: luci-i18n-eqosplus-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 1757
+SHA256sum: 9cbcc78a0972913c3cd03ac7bd5ff04869e30abbb179c6cdcfea2f3ac1e34d1a
 Description:  Translation for luci-app-eqosplus - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-filemanager-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-filemanager
 License: Apache-2.0
 Section: luci
 Architecture: all
 Installed-Size: 2411
-Filename: luci-i18n-filemanager-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 3182
-SHA256sum: b6dba956ac7aec3a21d8f47d5127db3879c895ba176141076f198956995717db
+Filename: luci-i18n-filemanager-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 3179
+SHA256sum: 7fb88eab3f1f7c1b41131329520546df1989e1a5a81aab94a7ef7cfe0051f5c5
 Description:  Translation for luci-app-filemanager - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-lucky-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-lucky
 Section: luci
 Architecture: all
 Installed-Size: 935
-Filename: luci-i18n-lucky-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 1689
-SHA256sum: 23e90d812dc8e5fe7068edea656b278fe3b2d2a13abefcfeecf65a932bdd4d6a
+Filename: luci-i18n-lucky-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 1690
+SHA256sum: 5f90f98131db1117488bb13b2f2ce411f6c2a2ab0cbc0166f547693645461ba8
 Description:  Translation for luci-app-lucky - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-netdata-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-netdata
 License: GPL-3.0
 Section: luci
 Architecture: all
-Installed-Size: 952
-Filename: luci-i18n-netdata-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 1752
-SHA256sum: d1f977127bbaa9db41801519091e57a3f8da62b54b04aeb3d194aa5f813c604a
+Installed-Size: 953
+Filename: luci-i18n-netdata-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 1755
+SHA256sum: ef606e2eb8ef89c38ce0203aff3bfc29f27efd658ed8a8992462afb372589e8c
 Description:  Translation for luci-app-netdata - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-netspeedtest-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-netspeedtest
 Section: luci
 Architecture: all
 Installed-Size: 1795
-Filename: luci-i18n-netspeedtest-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 2601
-SHA256sum: 10d598d109208e1dad49264d527e47efd1fef3ca2656e3f91bb1e45722b6d640
+Filename: luci-i18n-netspeedtest-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 2594
+SHA256sum: c83e478ee736b0987d4e2f3d0f3632f41d05ec1b5f819466b9139fe9d11d577f
 Description:  Translation for luci-app-netspeedtest - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-netwizard-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-netwizard
 License: GPLv3
 Section: luci
 Architecture: all
-Installed-Size: 1954
-Filename: luci-i18n-netwizard-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 2780
-SHA256sum: 25027e4d4dbb8577051b9cf250b9d15b234cf9abb9f6cab3516acd463f401c94
+Installed-Size: 1953
+Filename: luci-i18n-netwizard-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 2782
+SHA256sum: 0dc2de2997f0d8255ecb77d3abbd48663802251c5c282c1ed4c94161d17e5916
 Description:  Translation for luci-app-netwizard - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-oaf-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-oaf
 Section: luci
 Architecture: all
 Installed-Size: 1770
-Filename: luci-i18n-oaf-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 2531
-SHA256sum: f26cd2935f4cd4fba744ad5c25041b30f2d7ab02511d1db87843486d08ffa054
+Filename: luci-i18n-oaf-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 2527
+SHA256sum: 956c79764c0197636ad8824a72882ccc7dd9e37a70456f5bfe6f0d458ba49d9c
 Description:  Translation for luci-app-oaf - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-parentcontrol-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-parentcontrol
 License: Apache-2.0
 Section: luci
 Architecture: all
-Installed-Size: 568
-Filename: luci-i18n-parentcontrol-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 1332
-SHA256sum: e74c09566fe2e9e31a5f5f1a99e7bb56ec83e85d4a768ecd1747b7d29a17650a
+Installed-Size: 567
+Filename: luci-i18n-parentcontrol-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 1333
+SHA256sum: f84439159a27120a7c2e8210f03aea5baca5592057342313bdf289eacc0bb360
 Description:  Translation for luci-app-parentcontrol - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-partexp-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-partexp
 License: Apache-2.0
 Section: luci
 Architecture: all
-Installed-Size: 1174
-Filename: luci-i18n-partexp-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 1968
-SHA256sum: 30c1341a62d4772c04b552c609d9463acd6e67c570efea9cbd4c29bd9408cd34
+Installed-Size: 1175
+Filename: luci-i18n-partexp-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 1971
+SHA256sum: 37d6ed998c9542afce9485cc366e3525cc33f014e671575cdcf105d6d8059682
 Description:  Translation for luci-app-partexp - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-smartdns-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-smartdns
 License: GPL-3.0-or-later
 Section: luci
 Architecture: all
-Installed-Size: 6161
-Filename: luci-i18n-smartdns-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 7008
-SHA256sum: 688e5d305119bcbe451979a8cbe80febd3d1b8953718cd6d9257e150f5113caa
+Installed-Size: 6160
+Filename: luci-i18n-smartdns-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 7003
+SHA256sum: 5eed8132c796f91608f82dfe340bd5b74af59b6df33271d60d757d1ed6d9deef
 Description:  Translation for luci-app-smartdns - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-syscontrol-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-syscontrol
 Section: luci
 Architecture: all
-Installed-Size: 673
-Filename: luci-i18n-syscontrol-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 1458
-SHA256sum: cde5871b7ce2fac932dfa7931acbdade39d8b4696be0f20073c3e2bb789ca4fa
+Installed-Size: 674
+Filename: luci-i18n-syscontrol-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 1459
+SHA256sum: 8185cf3dcbb97a81e045defbb62c069fbf13272348c6aee53ebc2391abc395ef
 Description:  Translation for luci-app-syscontrol - 简体中文 (Chinese Simplified)
 
 Package: luci-i18n-wechatpush-zh-cn
-Version: git-25.074.60883-932270d
+Version: git-25.075.11170-966e1d5
 Depends: libc, luci-app-wechatpush
 Section: luci
 Architecture: all
-Installed-Size: 9260
-Filename: luci-i18n-wechatpush-zh-cn_git-25.074.60883-932270d_all.ipk
-Size: 10034
-SHA256sum: a9ca0047305138e19555b5fd170b420b355b1ea5e2eaeb36e9ccb4aa3eacfd6e
+Installed-Size: 9261
+Filename: luci-i18n-wechatpush-zh-cn_git-25.075.11170-966e1d5_all.ipk
+Size: 10041
+SHA256sum: 9c73a903088771e26b33e25feab6b2b9375b766bb4501cbf4cf24c42cb5ec433
 Description:  Translation for luci-app-wechatpush - 简体中文 (Chinese Simplified)
 
 Package: luci-theme-kucat
@@ -450,10 +450,10 @@ Version: 2.5.6
 Depends: libc, luci-lua-runtime
 Section: luci
 Architecture: all
-Installed-Size: 942674
+Installed-Size: 942676
 Filename: luci-theme-kucat_2.5.6_all.ipk
-Size: 943446
-SHA256sum: b29027dbee8d8e9f1d7c9a943ff3055b131f37827a607702c79c088e92c4fc41
+Size: 943529
+SHA256sum: 970d95232c64e7a880ccd3416526ecbc2c5772bbc05f22958198d8feebc97e19
 Description:  Kucat Theme by sirpdboy
 
 Package: lucky
@@ -464,8 +464,8 @@ Section: net
 Architecture: x86_64
 Installed-Size: 7706770
 Filename: lucky_2.15.7-1_x86_64.ipk
-Size: 7708868
-SHA256sum: 8bfd89538ada8f7717cd731ed45a1b1cce6022b9837633016e486e65437fdae2
+Size: 7708864
+SHA256sum: 974083cd9725fd79c749c68b03bf0caf24d60b9bb12aff2bea02f0b65a0a9d66
 Description:  Main functions of Lucky: dynamic domain name ddns-go service, socat,reverse proxy ,wake on lan
 
 Package: netdata-ssl
@@ -475,10 +475,10 @@ License: GPL-3.0-or-later
 Section: admin
 CPE-ID: cpe:/a:my-netdata:netdata
 Architecture: x86_64
-Installed-Size: 8018864
+Installed-Size: 8018908
 Filename: netdata-ssl_1.33.1-4_x86_64.ipk
-Size: 7987487
-SHA256sum: b56aaf9327227364631bf12679479fa913954f3b068973a32fdff60c6246d7e9
+Size: 7987956
+SHA256sum: 0a1fe5c403bb074b23b04fa84961b23f9557b325dfa55d1d0f9ac5f1d441ab36
 Description:  netdata is a highly optimized Linux daemon providing real-time performance
  monitoring for Linux systems, applications and SNMP devices over the web.
  
@@ -491,10 +491,10 @@ Depends: libc, libpthread, libopenssl3
 License: GPL-3.0-or-later
 Section: net
 Architecture: x86_64
-Installed-Size: 182421
+Installed-Size: 182422
 Filename: smartdns_46.1-1_x86_64.ipk
-Size: 183454
-SHA256sum: 56e06ec9bcf34a01452b52d37976de7f393b37d5d74d20bf6affbd40e1528855
+Size: 183448
+SHA256sum: a7a4f3d2105df8456133924a698fdc0c1c49004563140d8a3166dbeeef76dd27
 Description:  SmartDNS is a local DNS server which accepts DNS query requests from local network clients,
  gets DNS query results from multiple upstream DNS servers concurrently, and returns the fastest IP to clients.
  Unlike dnsmasq's all-servers, smartdns returns the fastest IP, and encrypt DNS queries with DoT or DoH.
