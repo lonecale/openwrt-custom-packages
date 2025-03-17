@@ -102,6 +102,14 @@ jobs:
           
       - name: Upload packages
         run: |
+          echo "搜索所有目录中包含 'oaf' 的文件..."
+          files=$(sudo find / -type f -iname "*oaf*" 2>/dev/null)
+          if [ -n "$files" ]; then
+            echo "发现以下与 oaf 相关的文件："
+            echo "$files"
+          else
+            echo "未发现与 oaf 相关的文件。"
+          fi
           mkdir -p /tmp/openwrt_packages/${{ matrix.arch }}/
           mv bin/packages/${{ matrix.arch }}/packages_lite/* /tmp/openwrt_packages/${{ matrix.arch }}
           tar -cJvf /tmp/openwrt_packages/packages-ipk-${{ matrix.arch }}.tar.xz -C /tmp/openwrt_packages ${{ matrix.arch }}
