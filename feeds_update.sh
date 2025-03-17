@@ -56,9 +56,6 @@ git clone https://github.com/sbwml/package_libs_ngtcp2 ngtcp2 --depth 1
 rm -rf ngtcp2/.git
 
 # git clone https://github.com/sbwml/OpenAppFilter luci-app-oaf --depth 1
-# sed -i '/#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0))/,/#endif/d' luci-app-oaf/oaf/src/af_log.c
-# rm -rf luci-app-oaf/{.git,LICENSE}
-
 git clone https://github.com/destan19/OpenAppFilter luci-app-oaf -b master --depth 1
 sed -i '/#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0))/,/#endif/d' luci-app-oaf/oaf/src/af_log.c
 rm -rf luci-app-oaf/{.git,LICENSE}
