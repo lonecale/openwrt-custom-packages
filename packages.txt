@@ -15,6 +15,7 @@ luci-app-parentcontrol
 luci-app-partexp
 luci-app-smartdns
 luci-app-syscontrol
+luci-app-timecontrol
 luci-app-wechatpush
 luci-theme-kucat
 lucky
