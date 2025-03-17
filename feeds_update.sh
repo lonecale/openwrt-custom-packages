@@ -86,6 +86,9 @@ rm -rf luci-theme-kucat/{.git,LICENSE}
 git clone https://github.com/sirpdboy/luci-app-eqosplus luci-app-eqosplus --depth 1
 rm -rf luci-app-eqosplus/{.git,LICENSE}
 
+git clone https://github.com/sirpdboy/luci-app-timecontrol luci-app-timecontrol -b main --depth 1
+rm -rf luci-app-timecontrol/{.git,LICENSE}
+
 git clone https://github.com/sirpdboy/luci-app-netwizard luci-app-netwizard --depth 1
 rm -rf luci-app-netwizard/{.git,.github,LICENSE}
 
