@@ -8,6 +8,7 @@ on:
     paths-ignore:
       - .github/**
       - packages.txt
+      - feeds_update.sh
   repository_dispatch:
     types: [Build_OpenWrt_Feeds]
 
