@@ -58,6 +58,7 @@ rm -rf ngtcp2/.git
 # git clone https://github.com/sbwml/OpenAppFilter luci-app-oaf --depth 1
 git clone https://github.com/destan19/OpenAppFilter luci-app-oaf -b master --depth 1
 #sed -i '/#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0))/,/#endif/d' luci-app-oaf/oaf/src/af_log.c
+sed -i '/#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0))/,/#endif/ s/KERNEL_VERSION(6, 12, 0)/KERNEL_VERSION(6, 11, 0)/' luci-app-oaf/oaf/src/af_log.c
 rm -rf luci-app-oaf/{.git,LICENSE}
 
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
