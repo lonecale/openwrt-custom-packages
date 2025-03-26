@@ -259,7 +259,8 @@ jobs:
             mkdir -p "$TARGET_SUB_DIR"
 
             if [ -d "$REPO_DIR/$DIR" ] && [ "$(ls -A "$REPO_DIR/$DIR" 2>/dev/null)" ]; then
-              mv "$REPO_DIR/$DIR"/* "$TARGET_SUB_DIR"
+              rsync -a --remove-source-files "$REPO_DIR/$DIR"/ "$TARGET_SUB_DIR"/
+              rm -rf "$REPO_DIR/$DIR"
             else
               echo -e "\033[31m目录 $REPO_DIR/$DIR 为空或不存在，跳过。\033[0m"
             fi
