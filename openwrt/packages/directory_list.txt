@@ -60,3 +60,4 @@ utils/rrdtool1
 utils/sane-backends
 utils/setserial
 utils/zsh
+utils/nvme-cli
