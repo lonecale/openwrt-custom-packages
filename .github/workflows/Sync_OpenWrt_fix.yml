@@ -240,7 +240,12 @@ jobs:
           TARGET_DIR="./$REPO"
           mkdir -p "$TARGET_DIR"
 
-          printf '%s\n' "${REPO_RESULTS[@]}" | sort -u >> "$DIRECTORY_FILE"
+          if [ -f "$DIRECTORY_FILE" ]; then
+            combined=$( (cat "$DIRECTORY_FILE"; printf '%s\n' "${REPO_RESULTS[@]}") | sort -u )
+            echo "$combined" > "$DIRECTORY_FILE"
+          else
+            printf '%s\n' "${REPO_RESULTS[@]}" | sort -u > "$DIRECTORY_FILE"
+          fi
 
           # 读取现有的内容到数组
           ALL_DIRECTORIES=()
@@ -255,23 +260,15 @@ jobs:
           # for DIR in "${REPO_RESULTS[@]}"; do
           for DIR in "${ALL_DIRECTORIES[@]}"; do
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
-            echo -e "\033[32m TARGET_SUB_DIR：$TARGET_SUB_DIR \033[0m"
+            # echo -e "\033[32m TARGET_SUB_DIR：$TARGET_SUB_DIR \033[0m"
             mkdir -p "$TARGET_SUB_DIR"
-            echo -e "\033[32m REPO_DIR_DIR：$REPO_DIR/$DIR \033[0m"
 
+            # echo -e "\033[32m REPO_DIR_DIR：$REPO_DIR/$DIR \033[0m"
             if [ -d "$REPO_DIR/$DIR" ]; then
-              echo -e "\033[32m目录 $REPO_DIR/$DIR 存在。\033[0m"
-              echo -e "\033[32m目录内容如下：\033[0m"
-              ls -al "$REPO_DIR/$DIR"
-            else
-              echo -e "\033[31m目录 $REPO_DIR/$DIR 不存在。\033[0m"
-            fi
-            
-            if [ -d "$REPO_DIR/$DIR" ] && [ "$(ls -A "$REPO_DIR/$DIR" 2>/dev/null)" ]; then
               rsync -a --remove-source-files "$REPO_DIR/$DIR"/ "$TARGET_SUB_DIR"/
               rm -rf "$REPO_DIR/$DIR"
             else
-              echo -e "\033[31m目录 $REPO_DIR/$DIR 为空或不存在，跳过。\033[0m"
+              echo -e "\033[31m目录 $REPO_DIR/$DIR 不存在，跳过。\033[0m"
             fi
 
           done
