@@ -245,7 +245,7 @@ jobs:
           # 读取现有的内容到数组
           ALL_DIRECTORIES=()
           mapfile -t ALL_DIRECTORIES < "$DIRECTORY_FILE"
-          echo -e "\033[32m ALL_DIRECTORIES：${ALL_DIRECTORIES[@]}。\033[0m"
+          # echo -e "\033[32m ALL_DIRECTORIES：${ALL_DIRECTORIES[@]}。\033[0m"
           
           
           # 将处理过的提交链接一次性写入 processed_commits.txt
@@ -257,7 +257,16 @@ jobs:
             TARGET_SUB_DIR="$TARGET_DIR/$DIR"
             echo -e "\033[32m TARGET_SUB_DIR：$TARGET_SUB_DIR \033[0m"
             mkdir -p "$TARGET_SUB_DIR"
+            echo -e "\033[32m REPO_DIR_DIR：$REPO_DIR/$DIR \033[0m"
 
+            if [ -d "$REPO_DIR/$DIR" ]; then
+              echo -e "\033[32m目录 $REPO_DIR/$DIR 存在。\033[0m"
+              echo -e "\033[32m目录内容如下：\033[0m"
+              ls -al "$REPO_DIR/$DIR"
+            else
+              echo -e "\033[31m目录 $REPO_DIR/$DIR 不存在。\033[0m"
+            fi
+            
             if [ -d "$REPO_DIR/$DIR" ] && [ "$(ls -A "$REPO_DIR/$DIR" 2>/dev/null)" ]; then
               rsync -a --remove-source-files "$REPO_DIR/$DIR"/ "$TARGET_SUB_DIR"/
               rm -rf "$REPO_DIR/$DIR"
