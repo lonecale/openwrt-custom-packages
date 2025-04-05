@@ -52,8 +52,8 @@ git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --d
 rm -rf luci-app-filemanager/.git
 
 # ngtcp2
-git clone https://github.com/sbwml/package_libs_ngtcp2 ngtcp2 --depth 1
-rm -rf ngtcp2/.git
+# git clone https://github.com/sbwml/package_libs_ngtcp2 ngtcp2 --depth 1
+# rm -rf ngtcp2/.git
 
 # git clone https://github.com/sbwml/OpenAppFilter luci-app-oaf --depth 1
 git clone https://github.com/destan19/OpenAppFilter luci-app-oaf -b master --depth 1
@@ -114,6 +114,7 @@ git clone https://github.com/kenzok8/small-package small-package -b main --depth
 # mv small-package/smartdns ./
 mv small-package/lucky ./
 mv small-package/adguardhome ./
+mv small-package/naiveproxy ./
 rm -rf small-package
 
 git clone https://github.com/kiddin9/kwrt-packages kwrt-packages -b main --depth 1
