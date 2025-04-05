@@ -19,6 +19,6 @@ luci-app-timecontrol
 luci-app-wechatpush
 luci-theme-kucat
 lucky
+naiveproxy
 netdata-ssl
-ngtcp2
 smartdns
