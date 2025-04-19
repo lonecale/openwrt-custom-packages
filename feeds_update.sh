@@ -16,6 +16,7 @@ svn_export() {
 # backup feeds
 shopt -s extglob
 mkdir -p /tmp/extd/
+rm -rf ./luci-app-adguardhome
 mv */ /tmp/extd/
 
 # download
@@ -23,7 +24,6 @@ mv */ /tmp/extd/
 # mv sirpdboy-package/luci-app-fileassistant ./
 # rm -rf sirpdboy-package
 
-rm -rf ./luci-app-adguardhome
 git clone https://github.com/sirpdboy/luci-app-adguardhome luci-app-adguardhome -b main --depth 1
 rm -rf luci-app-adguardhome/{.git}
 
