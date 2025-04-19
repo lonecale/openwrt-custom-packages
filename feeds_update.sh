@@ -16,7 +16,7 @@ svn_export() {
 # backup feeds
 shopt -s extglob
 mkdir -p /tmp/extd/
-rm -rf ./luci-app-adguardhome
+rm -rf luci-app-adguardhome
 mv */ /tmp/extd/
 
 # download
