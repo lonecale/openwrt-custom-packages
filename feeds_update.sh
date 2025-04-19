@@ -19,35 +19,26 @@ mkdir -p /tmp/extd/
 mv */ /tmp/extd/
 
 # download
-git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
-
-mkdir -p ./webcn
-mv sirpdboy-package/luci-app-netdata/root/usr/share/netdata/webcn/{dashboard_info.js,dashboard.js,main.js,index.html} ./webcn/
-mv sirpdboy-package/luci-app-netdata/root/etc/uci-defaults ./netdata-uci-defaults
-
+# git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
 # mv sirpdboy-package/luci-app-fileassistant ./
+# rm -rf sirpdboy-package
 
-rm -rf sirpdboy-package
-
-rm -rf luci-app-adguardhome
+rm -rf ./luci-app-adguardhome
 git clone https://github.com/sirpdboy/luci-app-adguardhome luci-app-adguardhome -b main --depth 1
 rm -rf luci-app-adguardhome/{.git}
 
 git clone https://github.com/muink/openwrt-netdata-ssl netdata-ssl -b master --depth 1
 rm -rf netdata-ssl/{.git,LICENSE}
 
+# git clone https://github.com/sirpdboy/luci-app-netdata netdata-webcn -b main --depth 1
+# mkdir -p ./webcn
+# mv netdata-webcn/root/usr/share/netdata/webcn/{dashboard_info.js,dashboard.js,main.js,index.html} ./webcn/
+
 git clone https://github.com/muink/luci-app-netdata luci-app-netdata -b master --depth 1
-mkdir -p luci-app-netdata/root/usr/share/netdata/webcn
-mkdir -p luci-app-netdata/root/etc/uci-defaults
-mv webcn/* luci-app-netdata/root/usr/share/netdata/webcn/
-sed -i '/\/usr\/share\/netdata\/webcn\/netdata/d' netdata-uci-defaults/40_luci-app-netdata
-sed -i '/\/usr\/share\/netdata\/webcn\/netdata.conf/d' netdata-uci-defaults/40_luci-app-netdata
-sed -i '/\/usr\/share\/netdata\/webcn\/netdata.init/d' netdata-uci-defaults/40_luci-app-netdata
-# sed -i 's/chmod +x //' netdata-uci-defaults/40_luci-app-netdata
-sed -i '/chmod +x/d' netdata-uci-defaults/40_luci-app-netdata
+# mkdir -p luci-app-netdata/root/usr/share/netdata/webcn
+# mv webcn/* luci-app-netdata/root/usr/share/netdata/webcn/
 sed -i '/msgid "Netdata"/{n;s/msgstr ""/msgstr "实时监控"/}' luci-app-netdata/po/zh_Hans/netdata.po
-mv netdata-uci-defaults/* luci-app-netdata/root/etc/uci-defaults/
-rm -rf webcn netdata-uci-defaults
+# rm -rf webcn
 rm -rf luci-app-netdata/{.git,LICENSE,po/zh_Hant}
 
 git clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager --depth 1
