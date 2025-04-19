@@ -1,4 +1,5 @@
 adguardhome
+luci-app-adguardhome
 luci-app-advancedplus
 luci-app-chatgpt-web
 luci-app-ddns-go
