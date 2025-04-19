@@ -20,7 +20,6 @@ mv */ /tmp/extd/
 
 # download
 git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
-mv sirpdboy-package/luci-app-adguardhome ./
 
 mkdir -p ./webcn
 mv sirpdboy-package/luci-app-netdata/root/usr/share/netdata/webcn/{dashboard_info.js,dashboard.js,main.js,index.html} ./webcn/
@@ -28,8 +27,10 @@ mv sirpdboy-package/luci-app-netdata/root/etc/uci-defaults ./netdata-uci-default
 
 # mv sirpdboy-package/luci-app-fileassistant ./
 
-rm -rf luci-app-adguardhome/{.git}
 rm -rf sirpdboy-package
+
+git clone https://github.com/sirpdboy/luci-app-adguardhome -b main --depth 1
+rm -rf luci-app-adguardhome/{.git}
 
 git clone https://github.com/muink/openwrt-netdata-ssl netdata-ssl -b master --depth 1
 rm -rf netdata-ssl/{.git,LICENSE}
@@ -66,8 +67,8 @@ git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
 mv luci-app-lucky/luci-app-lucky/* luci-app-lucky/
 rm -rf luci-app-lucky/{.git,.github,LICENSE,lucky,previews}
 
-git clone https://github.com/sirpdboy/luci-app-autotimeset luci-app-autotimeset --depth 1
-rm -rf luci-app-autotimeset/{.git,.github,LICENSE}
+git clone https://github.com/sirpdboy/luci-app-taskplan luci-app-taskplan --depth 1
+rm -rf luci-app-taskplan/{.git,.github,LICENSE}
 
 # git clone https://github.com/sirpdboy/luci-app-advancedplus luci-app-advancedplus --depth 1
 # rm -rf luci-app-advancedplus/{.git,.github,LICENSE}
