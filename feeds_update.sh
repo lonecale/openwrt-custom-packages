@@ -25,7 +25,7 @@ mv */ /tmp/extd/
 # rm -rf sirpdboy-package
 
 # git clone https://github.com/sirpdboy/luci-app-adguardhome luci-app-adguardhome -b main --depth 1
-# rm -rf luci-app-adguardhom/{.git}
+# rm -rf luci-app-adguardhome/{.git}
 
 git clone https://github.com/muink/openwrt-netdata-ssl netdata-ssl -b master --depth 1
 rm -rf netdata-ssl/{.git,LICENSE}
