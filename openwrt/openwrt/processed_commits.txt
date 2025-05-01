@@ -6,3 +6,4 @@ https://github.com/openwrt/openwrt/commit/0ed72c271b13078d2daff45349368ed80d4a1f
 https://github.com/openwrt/openwrt/commit/253d777c968b8fd74e857bec4cd74267daae0010
 https://github.com/openwrt/openwrt/commit/32e4c50d24d08570c6ae34d05922f1d9d879c0f2
 https://github.com/openwrt/openwrt/commit/0c96d20bf9fba6d814efa88c6fb08a5df094103a
+https://github.com/openwrt/openwrt/commit/9acd6e5e989ef796941db7e9a23e37d2e63ca265

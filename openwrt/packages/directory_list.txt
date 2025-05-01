@@ -47,6 +47,7 @@ net/wsdd2
 utils/augeas
 utils/bluez
 utils/collectd
+utils/coreutils
 utils/dump1090
 utils/hplip
 utils/klish
