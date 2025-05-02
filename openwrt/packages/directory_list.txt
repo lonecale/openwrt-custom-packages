@@ -14,6 +14,7 @@ libs/libroxml
 libs/libshout
 libs/openldap
 libs/unixodbc
+mail/mailsend
 mail/opendkim
 multimedia/ffmpeg
 multimedia/gphoto2
@@ -33,6 +34,7 @@ net/nbd
 net/net-snmp
 net/nfdump
 net/nginx
+net/ntpd
 net/ostiary
 net/pptpd
 net/remserial
@@ -44,6 +46,7 @@ net/uanytun
 net/udptunnel
 net/uwsgi
 net/wsdd2
+net/xfrpc
 utils/augeas
 utils/bluez
 utils/collectd
@@ -52,6 +55,7 @@ utils/dump1090
 utils/hplip
 utils/klish
 utils/lpac
+utils/lrzsz/patches
 utils/nsutils
 utils/nvme-cli
 utils/openzwave
