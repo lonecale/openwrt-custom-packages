@@ -1,9 +1,11 @@
 package/boot/uboot-kirkwood
 package/boot/uboot-lantiq
+package/libs/libsemanage
 package/network/services/ead
 package/network/utils/ebtables
 package/network/utils/iproute2
 package/utils/mdadm
+package/utils/policycoreutils
 target/linux/uml/image
 tools/b43-tools
 tools/sparse

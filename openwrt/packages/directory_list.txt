@@ -1,4 +1,5 @@
 admin/fluent-bit
+admin/freeipmi
 admin/schroot
 ipv6/tayga
 lang/lzmq
@@ -9,6 +10,7 @@ libs/libcli
 libs/libdbi-drivers
 libs/libdrm
 libs/libesmtp
+libs/libgee
 libs/libimobiledevice
 libs/libroxml
 libs/libshout
@@ -18,6 +20,7 @@ mail/mailsend
 mail/opendkim
 multimedia/ffmpeg
 multimedia/gphoto2
+multimedia/icecast
 multimedia/rtpmidid
 net/atlas-probe
 net/dante
