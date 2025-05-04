@@ -4,6 +4,7 @@ package/libs/libsemanage
 package/network/services/ead
 package/network/utils/ebtables
 package/network/utils/iproute2
+package/utils/dns320l-mcu
 package/utils/mdadm
 package/utils/policycoreutils
 target/linux/uml/image
