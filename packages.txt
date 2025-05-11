@@ -16,6 +16,7 @@ luci-app-smartdns
 luci-app-syscontrol
 luci-app-taskplan
 luci-app-timecontrol
+luci-app-watchdog
 luci-app-wechatpush
 luci-theme-kucat
 lucky
