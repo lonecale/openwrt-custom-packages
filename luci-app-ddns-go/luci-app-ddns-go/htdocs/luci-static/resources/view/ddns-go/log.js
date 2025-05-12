@@ -1,4 +1,4 @@
-
+/*   Copyright (C) 2021-2025 sirpdboy herboy2008@gmail.com https://github.com/sirpdboy/luci-app-ddns-go */
 'use strict';
 'require dom';
 'require fs';
@@ -36,7 +36,7 @@ return view.extend({
 			}, _('Collecting data ...'))
 		);
 
-		var log_path = '/tmp/watchdog/watchdog.log';
+		var log_path = '/var/log/ddns-go.log';
 		var lastLogContent = '';
 
 		var clear_log_button = E('div', {}, [
@@ -47,7 +47,7 @@ return view.extend({
 					var button = ev.target;
 					button.disabled = true;
 					button.textContent = _('Clear Logs...');
-					fs.exec_direct('/usr/libexec/watchdog-call', ['clear_log'])
+					fs.exec_direct('/usr/libexec/ddns-go-call', ['clear_log'])
 						.then(function () {
 							button.textContent = _('Logs cleared successfully!');
 							button.disabled = false;
@@ -96,11 +96,11 @@ return view.extend({
 				E('small', {}, _('Refresh every 5 seconds.').format(L.env.pollinterval)),
 				E('div', { 'class': 'cbi-section-actions cbi-section-actions-right' })
 			]),
-		E('div', { 'style': 'text-align: center; padding: 10px; font-style: italic;' }, [
+		E('div', { 'style': 'text-align: right;  font-style: italic;' }, [
                 E('span', {}, [
                     _('© github '),
                     E('a', { 
-                        'href': 'https://github.com/sirpdboy/luci-app-watchdog', 
+                        'href': 'https://github.com/sirpdboy', 
                         'target': '_blank',
                         'style': 'text-decoration: none;'
                     }, 'by sirpdboy')
