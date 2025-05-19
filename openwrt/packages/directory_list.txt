@@ -15,7 +15,9 @@ libs/libimobiledevice
 libs/libroxml
 libs/libshout
 libs/openldap
+libs/tcp_wrappers/patches
 libs/unixodbc
+mail/alpine
 mail/mailsend
 mail/opendkim
 multimedia/ffmpeg
