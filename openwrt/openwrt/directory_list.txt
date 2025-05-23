@@ -1,3 +1,5 @@
+include
+package/boot/uboot-bcm4908
 package/boot/uboot-kirkwood
 package/boot/uboot-lantiq
 package/libs/libsemanage
