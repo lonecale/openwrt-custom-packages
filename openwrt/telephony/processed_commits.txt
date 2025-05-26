@@ -1,0 +1,2 @@
+https://github.com/openwrt/telephony/commit/8d913746898c5a789ed9f750c10d81be262b08b8
+https://github.com/openwrt/telephony/commit/ea3c109727a5a2d7ddb99c27ebb0cf412a1a1558
