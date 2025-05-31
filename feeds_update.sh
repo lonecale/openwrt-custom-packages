@@ -67,13 +67,13 @@ rm -rf luci-app-taskplan/{.git,.github,LICENSE}
 # git clone https://github.com/sirpdboy/luci-app-advancedplus luci-app-advancedplus --depth 1
 # rm -rf luci-app-advancedplus/{.git,.github,LICENSE}
 
-git clone https://github.com/sirpdboy/luci-app-ddns-go luci-app-ddns-go --depth 1
+git clone https://github.com/sirpdboy/luci-app-ddns-go luci-app-ddns-go -b main --depth 1
 rm -rf luci-app-ddns-go/{.git,.github,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-app-partexp luci-app-partexp --depth 1
 rm -rf luci-app-partexp/{.git,.github,LICENSE}
 
-git clone https://github.com/sirpdboy/netspeedtest luci-app-netspeedtest --depth 1
+git clone https://github.com/sirpdboy/netspeedtest luci-app-netspeedtest  -b js --depth 1
 rm -rf luci-app-netspeedtest/{.git,.github,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-theme-kucat -b js --depth 1
