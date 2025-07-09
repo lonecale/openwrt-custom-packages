@@ -10,5 +10,6 @@ package/utils/dns320l-mcu
 package/utils/mdadm
 package/utils/policycoreutils
 target/linux/uml/image
+toolchain/gcc/patches-15.x
 tools/b43-tools
 tools/sparse
