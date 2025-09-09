@@ -24,6 +24,7 @@ multimedia/ffmpeg
 multimedia/gphoto2
 multimedia/icecast
 multimedia/rtpmidid
+net/atftp/patches
 net/atlas-probe
 net/dante
 net/dmapd

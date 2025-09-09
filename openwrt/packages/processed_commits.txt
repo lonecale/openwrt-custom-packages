@@ -74,3 +74,4 @@ https://github.com/openwrt/packages/commit/aef483bad5fd0082b607addce7a89f8e7d2cf
 https://github.com/openwrt/packages/commit/a2601e963c053b5dbf4aba1d148762f566f7a6fd
 https://github.com/openwrt/packages/commit/a2f30ef123eb5325f3d6971c689366a3ba5ccaf7
 https://github.com/openwrt/packages/commit/8419c5c532ac1cc3463d9e7201f5ef009676d511
+https://github.com/openwrt/packages/commit/8132457ddda0901a07d196295b4633f7713b0710

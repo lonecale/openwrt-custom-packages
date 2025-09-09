@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=alpine
 PKG_VERSION:=2.25
-PKG_RELEASE:=4
+PKG_RELEASE:=5
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://alpineapp.email/alpine/release/src/Old
@@ -18,6 +18,7 @@ PKG_HASH:=658a150982f6740bb4128e6dd81188eaa1212ca0bf689b83c2093bb518ecf776
 PKG_MAINTAINER:=Antti Seppälä <a.seppala@gmail.com>
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
+PKG_CPE_ID:=cpe:/a:alpine_project:alpine
 
 PKG_INSTALL:=1
 
@@ -27,7 +28,7 @@ include $(INCLUDE_DIR)/nls.mk
 define Package/alpine/Default
   SECTION:=mail
   CATEGORY:=Mail
-  DEPENDS:=+libopenssl +libncurses +libpthread +libpam $(ICONV_DEPENDS) $(INTL_DEPENDS)
+  DEPENDS:= +USE_GLIBC:libcrypt-compat +libopenssl +libncurses +libpthread +libpam $(ICONV_DEPENDS) $(INTL_DEPENDS)
   TITLE:=Alternatively Licensed Program for Internet News and Email
   URL:=http://alpine.x10host.com/alpine/
 endef
