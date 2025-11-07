@@ -17,7 +17,6 @@ luci-app-taskplan
 luci-app-timecontrol
 luci-app-watchdog
 luci-app-wechatpush
-luci-theme-kucat
 lucky
 naiveproxy
 netdata-ssl
