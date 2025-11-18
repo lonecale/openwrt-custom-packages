@@ -125,6 +125,7 @@ rm -rf immortalwrt-luci
 
 git clone https://github.com/immortalwrt/packages immortalwrt-packages -b master --depth 1
 mv immortalwrt-packages/net/smartdns ./
+sed -i 's|include ../../lang/rust/rust-package.mk|include $(TOPDIR)/feeds/packages/lang/rust/rust-package.mk|' smartdns/Makefile
 rm -rf immortalwrt-packages
 
 # 输出目录列表并保存到 packages.txt
