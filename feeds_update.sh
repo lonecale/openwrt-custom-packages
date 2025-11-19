@@ -78,8 +78,8 @@ rm -rf luci-app-netspeedtest/{.git,.github,LICENSE}
 git clone https://github.com/sirpdboy/luci-theme-kucat -b master --depth 1
 rm -rf luci-theme-kucat/{.git,LICENSE}
 
-git clone https://github.com/sirpdboy/luci-app-kucat-config -b master --depth 1
-rm -rf luci-app-kucat-config/{.git,LICENSE}
+# git clone https://github.com/sirpdboy/luci-app-kucat-config -b master --depth 1
+# rm -rf luci-app-kucat-config/{.git,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-app-eqosplus luci-app-eqosplus --depth 1
 rm -rf luci-app-eqosplus/{.git,LICENSE}
