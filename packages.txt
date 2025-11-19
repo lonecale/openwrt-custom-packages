@@ -5,6 +5,7 @@ luci-app-chatgpt-web
 luci-app-ddns-go
 luci-app-eqosplus
 luci-app-filemanager
+luci-app-kucat-config
 luci-app-lucky
 luci-app-netdata
 luci-app-netspeedtest
