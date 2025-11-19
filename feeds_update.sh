@@ -23,7 +23,7 @@ mv */ /tmp/extd/
 # mv sirpdboy-package/luci-app-fileassistant ./
 # rm -rf sirpdboy-package
 
-git clone https://github.com/sirpdboy/luci-app-adguardhome luci-app-adguardhome -b lua --depth 1
+git clone https://github.com/sirpdboy/luci-app-adguardhome luci-app-adguardhome -b main --depth 1
 rm -rf luci-app-adguardhome/.git
 
 git clone https://github.com/sirpdboy/luci-app-watchdog luci-app-watchdog -b main --depth 1
@@ -77,7 +77,10 @@ rm -rf luci-app-partexp/{.git,.github,LICENSE}
 git clone https://github.com/sirpdboy/netspeedtest luci-app-netspeedtest  -b js --depth 1
 rm -rf luci-app-netspeedtest/{.git,.github,LICENSE}
 
-git clone https://github.com/sirpdboy/luci-theme-kucat -b js --depth 1
+git clone https://github.com/sirpdboy/luci-theme-kucat -b master --depth 1
+rm -rf luci-theme-kucat/{.git,LICENSE}
+
+git clone https://github.com/sirpdboy/luci-app-kucat-config -b master --depth 1
 rm -rf luci-theme-kucat/{.git,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-app-eqosplus luci-app-eqosplus --depth 1
