@@ -19,9 +19,6 @@ mkdir -p /tmp/extd/
 mv */ /tmp/extd/
 
 # download
-# git clone https://github.com/sirpdboy/sirpdboy-package sirpdboy-package -b main --depth 1
-# mv sirpdboy-package/luci-app-fileassistant ./
-# rm -rf sirpdboy-package
 
 git clone https://github.com/sirpdboy/luci-app-adguardhome luci-app-adguardhome -b main --depth 1
 rm -rf luci-app-adguardhome/.git
@@ -74,7 +71,7 @@ rm -rf luci-app-ddns-go/{.git,.github,LICENSE}
 git clone https://github.com/sirpdboy/luci-app-partexp luci-app-partexp --depth 1
 rm -rf luci-app-partexp/{.git,.github,LICENSE}
 
-git clone https://github.com/sirpdboy/netspeedtest luci-app-netspeedtest  -b js --depth 1
+git clone https://github.com/sirpdboy/netspeedtest luci-app-netspeedtest  -b master --depth 1
 rm -rf luci-app-netspeedtest/{.git,.github,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-theme-kucat -b master --depth 1
