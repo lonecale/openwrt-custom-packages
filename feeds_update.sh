@@ -57,7 +57,8 @@ rm -rf luci-app-oaf/{.git,LICENSE}
 # git clone https://github.com/gdy666/luci-app-lucky luci-app-lucky --depth 1
 git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
 mv luci-app-lucky/luci-app-lucky/* luci-app-lucky/
-rm -rf luci-app-lucky/{.git,.github,LICENSE,lucky,previews}
+mv luci-app-lucky/lucky ./
+rm -rf luci-app-lucky/{.git,.github,LICENSE,lucky}
 
 git clone https://github.com/sirpdboy/luci-app-taskplan luci-app-taskplan --depth 1
 rm -rf luci-app-taskplan/{.git,.github,LICENSE}
@@ -108,7 +109,7 @@ rm -rf luci-app-syscontrol/{.git,.github,LICENSE,README_en.md}
 git clone https://github.com/kenzok8/small-package small-package -b main --depth 1
 
 # mv small-package/smartdns ./
-mv small-package/lucky ./
+# mv small-package/lucky ./
 mv small-package/adguardhome ./
 mv small-package/naiveproxy ./
 rm -rf small-package
