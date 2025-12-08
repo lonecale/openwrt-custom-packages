@@ -58,7 +58,7 @@ rm -rf luci-app-oaf/{.git,LICENSE}
 git clone https://github.com/sirpdboy/luci-app-lucky luci-app-lucky --depth 1
 mv luci-app-lucky/luci-app-lucky/* luci-app-lucky/
 mv luci-app-lucky/lucky ./
-rm -rf luci-app-lucky/{.git,.github,LICENSE,lucky}
+rm -rf luci-app-lucky/{.git,.github,LICENSE}
 
 git clone https://github.com/sirpdboy/luci-app-taskplan luci-app-taskplan --depth 1
 rm -rf luci-app-taskplan/{.git,.github,LICENSE}
