@@ -1,6 +1,6 @@
-adguardhome
 luci-app-adguardhome
 luci-app-advancedplus
+luci-app-chatgpt-web
 luci-app-ddns-go
 luci-app-eqosplus
 luci-app-filemanager
@@ -20,6 +20,5 @@ luci-app-watchdog
 luci-app-wechatpush
 luci-theme-kucat
 lucky
-naiveproxy
 netdata-ssl
 smartdns
