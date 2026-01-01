@@ -9,6 +9,20 @@
 
 ## 功能说明：
 
+### 2025.12.28 上网时间控制js版 v3.2.1 为方便统一名字用回luci-app-timecontrol
+
+- 1.升级JS版本，全新整理制作。
+- 2.修复NFT模式上个版本无法使用问题
+- 3.增加日志显示功能，实时显示增加或者删除的机器限制等。
+- 4.增加普通管制功能。
+- 5.增强强力管控力度，增加即时断开功能。
+
+- 1. Upgrade the JS version and completely reorganize and produce it.
+- 2. Fix the issue that the previous version of NFT mode was unusable
+- 3. Add a log display function to show in real-time any additions or deletions of machine restrictions.
+- 4. Add general control functions.
+- 5. Enhance strong control measures and add an instant disconnection function.
+
 ### 上网时间控制NFT版2.0.2版
 
 #### 专门针对24.10分支，适配NFT的上网时间控制插件。21.04NFT版名字：luci-app-nft-timecontrol 2.X ,18.06名字：luci-app-timecontrol 1.X（早期几年前做的版本）
@@ -59,7 +73,9 @@
 
 ## 界面
 
-![screenshots](./doc/timecontrol.png)
+![screenshots](./doc/timecontrol1.png)
+
+![screenshots](./doc/timecontrol2.png)
 
 # My other project
 
