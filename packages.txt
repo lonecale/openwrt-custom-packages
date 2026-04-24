@@ -1,5 +1,6 @@
 adguardhome
 luci-app-adguardhome
+luci-app-advancedplus
 luci-app-chatgpt-web
 luci-app-ddns-go
 luci-app-eqosplus
@@ -11,6 +12,7 @@ luci-app-netwizard
 luci-app-oaf
 luci-app-parentcontrol
 luci-app-partexp
+luci-app-smartdns
 luci-app-syscontrol
 luci-app-taskplan
 luci-app-timecontrol
@@ -20,3 +22,4 @@ luci-theme-kucat
 lucky
 naiveproxy
 netdata-ssl
+smartdns
