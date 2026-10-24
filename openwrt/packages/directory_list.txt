@@ -41,6 +41,7 @@ net/net-snmp
 net/nfdump
 net/nginx
 net/ntpd
+net/openthread-br
 net/ostiary
 net/pptpd
 net/remserial
